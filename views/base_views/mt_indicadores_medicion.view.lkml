@@ -34,6 +34,10 @@ view: mt_indicadores_medicion {
   dimension: objetivo {
     type: number
     sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/3?Plaza={{ _filters['mt_indicadores_medicion.ambito'] | url_encode }}"
+    }
   }
 
   dimension: valor {
