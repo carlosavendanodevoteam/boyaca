@@ -7,7 +7,13 @@ view: derived_ind_4_5_7 {
           CONCAT(p.DELE_LEC, " - " , r.Nombre," - ",r.Region) AS PLAZA,
           p.BULT_CODIGO,
           IF(p.ENCONTRADO='S', p.BULT_CODIGO, NULL) as BULT_CODIGO_leido,
-          EXPE_CODIGO, EXPE_NUMERO
+          EXPE_CODIGO,
+          EXPE_NUMERO,
+          DELE_LECT,
+          VIAJ_DES,
+          VIAJ_ORI,
+          VIAJ_CODIGO,
+
 
       FROM
           `datalake-transporte.alertran.v_calidad_lecturas` p
@@ -71,6 +77,27 @@ view: derived_ind_4_5_7 {
     sql: ${TABLE}.EXPE_NUMERO ;;
   }
 
+  dimension: dele_lect {
+    type: string
+    sql: ${TABLE}.DELE_LECT ;;
+  }
+
+  dimension: viaj_des {
+    type: string
+    sql: ${TABLE}.VIAJ_DES ;;
+  }
+
+  dimension: viaj_ori {
+    type: string
+    sql: ${TABLE}.VIAJ_ORI ;;
+  }
+
+  dimension: viaj_codigo {
+    type: string
+    sql: ${TABLE}.VIAJ_CODIGO ;;
+  }
+
+
   set: detail {
     fields: [
         fecha_filtro,
@@ -79,7 +106,11 @@ view: derived_ind_4_5_7 {
   bult_codigo,
   bult_codigo_leido,
   expe_codigo,
-  expe_numero
+  expe_numero,
+  dele_lect,
+  viaj_ori,
+  viaj_des,
+  viaj_codigo
     ]
   }
 }
