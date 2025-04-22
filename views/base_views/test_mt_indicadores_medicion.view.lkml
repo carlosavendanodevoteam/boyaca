@@ -21,7 +21,7 @@ view: test_mt_indicadores_medicion {
     sql: ${TABLE}.objetivo ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/3?Plaza={{ _filters['test_mt_indicadores_medicion.ambito'] | url_encode }}"
+      url: "/dashboards/3?Plaza={{ _filters['test_mt_indicadores_medicion.plaza'] | url_encode }}&Region={{ _filters['test_mt_indicadores_medicion.region'] | url_encode }}"
     }
   }
   dimension: plaza {
