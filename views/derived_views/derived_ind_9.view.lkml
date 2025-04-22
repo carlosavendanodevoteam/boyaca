@@ -1,21 +1,22 @@
 
 view: derived_ind_9 {
   derived_table: {
-    sql: SELECT  
+    sql: SELECT
           p.FECHA_SALIDA  as FECHA_FILTRO,
           r.Region as REGION,
           CONCAT(p.DELE_CODIGO_ORI, " - " , r.Nombre," - ",r.Region) AS PLAZA,
           -- Si el viaje es Ficticio no se contabiliza el viaje en si pero si sus kilos
           p.KILOS_VIAJE,
-          CASE WHEN (p.CAMI_MATRICULA NOT IN ('9999TBO') ) THEN 
-              p.VIAJ_CODIGO 
-          ELSE 
-              NULL 
+          CASE WHEN (p.CAMI_MATRICULA NOT IN ('9999TBO') ) THEN
+              p.VIAJ_CODIGO
+          ELSE
+              NULL
           END
-          as VIAJ_CODIGO
-          
-      
-      FROM 
+          as VIAJ_CODIGO,
+           DELE_CODIGO_DES,DELE_NOM_DES
+
+
+      FROM
           `datalake-transporte.alertran.v_viajes_report_diario` p
           INNER JOIN `datalake-transporte.alertran.t_regiones_agencias`  r  -- Si no esta en la tabla de regiones agencias no se muestra
           ON p.DELE_CODIGO_ORI = r.DELE_CODIGO ;;
@@ -52,13 +53,25 @@ view: derived_ind_9 {
     sql: ${TABLE}.VIAJ_CODIGO ;;
   }
 
+  dimension: dele_codigo_des {
+    type: string
+    sql: ${TABLE}.DELE_CODIGO_DES ;;
+  }
+
+  dimension: dele_nom_des {
+    type: string
+    sql: ${TABLE}.DELE_NOM_DES ;;
+  }
+
   set: detail {
     fields: [
         fecha_filtro,
-	region,
-	plaza,
-	kilos_viaje,
-	viaj_codigo
+  region,
+  plaza,
+  kilos_viaje,
+  viaj_codigo,
+  dele_codigo_des,
+  dele_nom_des
     ]
   }
 }
