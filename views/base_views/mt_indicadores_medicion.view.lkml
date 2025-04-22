@@ -39,6 +39,7 @@ view: mt_indicadores_medicion {
   dimension: valor {
     type: number
     sql: ${TABLE}.VALOR ;;
+    value_format: "0.##"
   }
   measure: count {
     type: count
