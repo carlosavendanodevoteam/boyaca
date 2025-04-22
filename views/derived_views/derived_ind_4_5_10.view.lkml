@@ -111,6 +111,11 @@ view: derived_ind_4_5_7 {
     sql: ${TABLE}.PROCESO ;;
   }
 
+  dimension: dele_control {
+    type: string
+    sql: CASE WHEN ${proceso} = 'SALIDA' THEN CONCAT('DES:',${viaj_des}) ELSE CONCAT('ORI:' ,${viaj_ori}) END ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
@@ -170,6 +175,8 @@ view: derived_ind_4_5_7 {
     type:  number
     sql:  SAFE_DIVIDE(${coord_leidos},${coordinacion});;
   }
+
+
 
 
 
