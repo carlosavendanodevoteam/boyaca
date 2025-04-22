@@ -20,10 +20,13 @@ view: derived_ind_4_5_7 {
       -- Para ind 5
       --WHERE
       --  TIPO_REP_REC='REPARTO'
-    --AND MUELLE = 'N'
-    -- RECADERO = 'N'
-    --AND PRODUCTO IN (Null, 'PR - PREFRENTE', 'GR - GRUPAJE', 'MA - MARITIMO', 'EX - EXCLUSIVO' )
-    --AND NAF NOT IN ('EMG-EMP GRUPO') AND NAF IS NOT Null
+        --AND MUELLE = 'N'
+        -- RECADERO = 'N'
+        --AND PRODUCTO IN (Null, 'PR - PREFRENTE', 'GR - GRUPAJE', 'MA - MARITIMO', 'EX - EXCLUSIVO' )
+        --AND NAF NOT IN ('EMG-EMP GRUPO') AND NAF IS NOT Null
+
+    --Para ind 10
+    --WHERE PROCESO='SALIDA'
     ;;
   }
 
