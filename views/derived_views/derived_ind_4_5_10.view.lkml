@@ -13,6 +13,8 @@ view: derived_ind_4_5_7 {
           VIAJ_DES,
           VIAJ_ORI,
           VIAJ_CODIGO,
+          PROPIA_COORD,
+          ENCONTRADO
 
 
       FROM
@@ -36,10 +38,6 @@ view: derived_ind_4_5_7 {
     ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
 
   dimension: fecha_filtro {
     type: date
@@ -96,6 +94,36 @@ view: derived_ind_4_5_7 {
     type: string
     sql: ${TABLE}.VIAJ_CODIGO ;;
   }
+
+  dimension: propia_coord {
+    type: string
+    sql: ${TABLE}.PROPIA_COORD ;;
+  }
+
+  dimension: encontrado {
+    type: string
+    sql: ${TABLE}.PROPIA_COORD ;;
+  }
+
+  # COUNT_DISTINCT(IF(PROPIA_COORD='PROPIA' AND ENCONTRADO='S', BULT_CODIGO, NULL))
+
+  measure: count {
+    type: count
+    drill_fields: [detail*]
+  }
+
+  measure: num_viajes {
+    type:  count_distinct
+    sql:  ${TABLE}.VIAJ_CODIGO;;
+  }
+
+  measure: num_bultos {
+    type:  count_distinct
+    sql:  ${TABLE}.BULT_CODIGO;;
+  }
+
+
+
 
 
   set: detail {
