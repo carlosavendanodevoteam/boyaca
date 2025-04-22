@@ -1,5 +1,5 @@
 
-view: derived_ind_1 {
+view: derived_ind_1_2 {
   derived_table: {
     sql: SELECT
           p.ORTR_FECHA as FECHA_FILTRO,
