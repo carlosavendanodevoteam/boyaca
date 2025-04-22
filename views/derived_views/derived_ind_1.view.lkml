@@ -14,6 +14,7 @@ view: derived_ind_1 {
           ON p.DELE_CODIGO = r.DELE_CODIGO
 
       WHERE
+          --Movimiento = "ENTREGA" AND --PARA IND_2
           -- Hay registros con valor a 0. Si no hay kilos el coste no se debe repercutir sobre los kilos
           IF(Max_fin = "S", EXPE_PESO_OCUPACION, 0) > 0
           -- Exclusiones P. Telleria
