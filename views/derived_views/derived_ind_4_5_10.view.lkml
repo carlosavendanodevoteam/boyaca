@@ -14,7 +14,8 @@ view: derived_ind_4_5_7 {
           VIAJ_ORI,
           VIAJ_CODIGO,
           PROPIA_COORD,
-          ENCONTRADO
+          ENCONTRADO,
+          PROCESO
 
 
       FROM
@@ -102,10 +103,13 @@ view: derived_ind_4_5_7 {
 
   dimension: encontrado {
     type: string
-    sql: ${TABLE}.PROPIA_COORD ;;
+    sql: ${TABLE}.ENCONTRADO ;;
   }
 
-  # COUNT_DISTINCT(IF(PROPIA_COORD='PROPIA' AND ENCONTRADO='S', BULT_CODIGO, NULL))
+  dimension: proceso {
+    type: string
+    sql: ${TABLE}.PROCESO ;;
+  }
 
   measure: count {
     type: count
@@ -122,7 +126,50 @@ view: derived_ind_4_5_7 {
     sql:  ${TABLE}.BULT_CODIGO;;
   }
 
+  measure: prop_leidos {
+    type:  number
+    sql:  COUNT(DISTINCT(IF(${propia_coord}='PROPIA' AND ${encontrado}='S', ${bult_codigo}, NULL)));;
+  }
 
+  measure: propios {
+    type:  number
+    sql:  COUNT(DISTINCT(IF(${propia_coord}='PROPIA', ${bult_codigo}, NULL)));;
+  }
+
+  measure: prop_no_leidos {
+    type:  number
+    sql:  ${propios} - ${prop_leidos};;
+  }
+
+  measure: coord_leidos {
+    type:  number
+    sql:  COUNT(DISTINCT(IF(${propia_coord}='COORDINACION' AND ${encontrado}='S', ${bult_codigo}, NULL)));;
+  }
+
+  measure: coordinacion {
+    type:  number
+    sql:  COUNT(DISTINCT(IF(${propia_coord}='COORDINACION', ${bult_codigo}, NULL)));;
+  }
+
+  measure: coord_no_leidos {
+    type:  number
+    sql:  ${coordinacion} - ${coord_leidos};;
+  }
+
+  measure: porc_bultos {
+    type:  number
+    sql:  (${prop_leidos} + ${coord_leidos})/(${propios} + ${coordinacion});;
+  }
+
+  measure: porc_prop {
+    type:  number
+    sql:  SAFE_DIVIDE(${prop_leidos},${propios});;
+  }
+
+  measure: porc_coord {
+    type:  number
+    sql:  SAFE_DIVIDE(${coord_leidos},${coordinacion});;
+  }
 
 
 
