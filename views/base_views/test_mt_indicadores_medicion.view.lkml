@@ -74,7 +74,7 @@ view: test_mt_indicadores_medicion {
     sql: ${TABLE}.objetivo ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+      url: "/dashboards/7?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"%\"0.00"
   }
@@ -84,7 +84,7 @@ view: test_mt_indicadores_medicion {
     sql: ${TABLE}.objetivo ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+      url: "/dashboards/7?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"%\"0.00"
   }
@@ -94,7 +94,7 @@ view: test_mt_indicadores_medicion {
     sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+      url: "/dashboards/7?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"%\"0.00"
   }
@@ -104,14 +104,14 @@ view: test_mt_indicadores_medicion {
     sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+      url: "/dashboards/7?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"%\"0.00"
   }
 
 
 # --------------------------------------
-# Indicador 4: % Lecturas (Carga)
+# Indicador 4: % Lecturas (Descarga)
 # --------------------------------------
   dimension: objetivo_ind_4 {
     type: number
@@ -142,7 +142,7 @@ view: test_mt_indicadores_medicion {
     }
     value_format: "\"%\"0.00"
   }
-  # /dashboards/4?Proceso=LLEGADA&Plaza=&Region=&Fecha+Filtro=7+day
+
   measure: valor_avg_ind_4 {
     type: average
     sql: ${TABLE}.VALOR ;;
