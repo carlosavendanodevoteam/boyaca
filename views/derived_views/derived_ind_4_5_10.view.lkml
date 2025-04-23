@@ -1,5 +1,5 @@
 
-view: derived_ind_4_5_7 {
+view: derived_ind_4_5_10 {
   derived_table: {
     sql: SELECT
           p.VIAJ_FECHA_SALIDA as FECHA_FILTRO,
@@ -10,12 +10,12 @@ view: derived_ind_4_5_7 {
           EXPE_CODIGO,
           EXPE_NUMERO,
           DELE_LECT,
-          VIAJ_DES,
-          VIAJ_ORI,
           VIAJ_CODIGO,
-          PROPIA_COORD,
-          ENCONTRADO,
-          PROCESO
+          VIAJ_ORI,
+          VIAJ_DES,
+          CLIENTE,
+          PROCESO,
+          ENCONTRADO
 
 
       FROM
@@ -76,7 +76,7 @@ view: derived_ind_4_5_7 {
     sql: ${TABLE}.EXPE_NUMERO ;;
   }
 
-  dimension: dele_lect {
+  dimension: agencia {
     type: string
     sql: ${TABLE}.DELE_LECT ;;
   }
@@ -96,34 +96,30 @@ view: derived_ind_4_5_7 {
     sql: ${TABLE}.VIAJ_CODIGO ;;
   }
 
-  dimension: propia_coord {
-    type: string
-    sql: ${TABLE}.PROPIA_COORD ;;
-  }
-
-  dimension: encontrado {
-    type: string
-    sql: ${TABLE}.ENCONTRADO ;;
-  }
-
   dimension: proceso {
     type: string
     sql: ${TABLE}.PROCESO ;;
   }
 
-  dimension: dele_control {
+  dimension: cliente {
     type: string
-    sql: CASE WHEN ${proceso} = 'SALIDA' THEN CONCAT('DES:',${viaj_des}) ELSE CONCAT('ORI:' ,${viaj_ori}) END ;;
+    sql: ${TABLE}.CLIENTE ;;
   }
+
+  dimension: ruta {
+    type:  string
+    sql:  CONCAT(${viaj_ori}, ' - ', ${viaj_des});;
+  }
+
+  dimension: encontrado {
+    type:  string
+    sql:  ${TABLE}.ENCONTRADO;;
+  }
+
 
   measure: count {
     type: count
     drill_fields: [detail*]
-  }
-
-  measure: num_viajes {
-    type:  count_distinct
-    sql:  ${TABLE}.VIAJ_CODIGO;;
   }
 
   measure: num_bultos {
@@ -131,53 +127,15 @@ view: derived_ind_4_5_7 {
     sql:  ${TABLE}.BULT_CODIGO;;
   }
 
-  measure: prop_leidos {
-    type:  number
-    sql:  COUNT(DISTINCT(IF(${propia_coord}='PROPIA' AND ${encontrado}='S', ${bult_codigo}, NULL)));;
+  measure: leidos {
+    type:  count_distinct
+    sql:  CASE WHEN ${encontrado} = 'S' THEN ${bult_codigo} ELSE NULL END;;
   }
 
-  measure: propios {
-    type:  number
-    sql:  COUNT(DISTINCT(IF(${propia_coord}='PROPIA', ${bult_codigo}, NULL)));;
+  measure: no_leidos {
+    type:  count_distinct
+    sql:  CASE WHEN ${encontrado} = 'N' THEN ${bult_codigo} ELSE NULL END;;
   }
-
-  measure: prop_no_leidos {
-    type:  number
-    sql:  ${propios} - ${prop_leidos};;
-  }
-
-  measure: coord_leidos {
-    type:  number
-    sql:  COUNT(DISTINCT(IF(${propia_coord}='COORDINACION' AND ${encontrado}='S', ${bult_codigo}, NULL)));;
-  }
-
-  measure: coordinacion {
-    type:  number
-    sql:  COUNT(DISTINCT(IF(${propia_coord}='COORDINACION', ${bult_codigo}, NULL)));;
-  }
-
-  measure: coord_no_leidos {
-    type:  number
-    sql:  ${coordinacion} - ${coord_leidos};;
-  }
-
-  measure: porc_bultos {
-    type:  number
-    sql:  (${prop_leidos} + ${coord_leidos})/(${propios} + ${coordinacion});;
-  }
-
-  measure: porc_prop {
-    type:  number
-    sql:  SAFE_DIVIDE(${prop_leidos},${propios});;
-  }
-
-  measure: porc_coord {
-    type:  number
-    sql:  SAFE_DIVIDE(${coord_leidos},${coordinacion});;
-  }
-
-
-
 
 
   set: detail {
@@ -189,10 +147,14 @@ view: derived_ind_4_5_7 {
   bult_codigo_leido,
   expe_codigo,
   expe_numero,
-  dele_lect,
+  agencia,
   viaj_ori,
   viaj_des,
-  viaj_codigo
+  viaj_codigo,
+  cliente,
+  proceso,
+  ruta,
+  encontrado
     ]
   }
 }
