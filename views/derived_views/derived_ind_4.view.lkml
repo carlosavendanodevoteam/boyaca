@@ -1,4 +1,4 @@
-view: derived_ind_4_5_10 {
+view: derived_ind_4 {
   derived_table: {
     sql: SELECT
           p.VIAJ_FECHA_SALIDA as FECHA_FILTRO,
