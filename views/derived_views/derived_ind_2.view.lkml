@@ -1,5 +1,5 @@
 
-view: derived_ind_1_2 {
+view: derived_ind_2 {
   derived_table: {
     sql: SELECT
     p.ORTR_FECHA as FECHA_FILTRO,
@@ -14,8 +14,9 @@ FROM
     ON p.DELE_CODIGO = r.DELE_CODIGO
 
 WHERE
-    -- Hay registros con valor a 0. Si no hay kilos el coste no se debe repercutir sobre los kilos
-    IF(Max_fin = "S", EXPE_PESO_OCUPACION, 0) > 0
+    Movimiento = "ENTREGA"
+    AND Max_fin = "S"
+
     -- Exclusiones P. Telleria
     AND TEEX_CODIGO <> 'RECO' -- Modificar a CR_CODIGO <> RECO
     AND Producto NOT IN ('BA - SERVICIOS A ENTIDADES BANCARIAS  Y SIMILAR', 'ED - EDITORIAL (PARA RUTAS EDITORIAL)','SA - SANITARIO')

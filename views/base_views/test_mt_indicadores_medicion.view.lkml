@@ -16,7 +16,7 @@ view: test_mt_indicadores_medicion {
     type: number
     sql: ${TABLE}.id_indicador ;;
   }
-  dimension: objetivo {
+  dimension: objetivo_ind_1 {
     type: number
     sql: ${TABLE}.objetivo ;;
     link: {
@@ -26,12 +26,12 @@ view: test_mt_indicadores_medicion {
     value_format: "\"€\"0.00"
   }
 
-  measure: objetivo_avg {
+  measure: objetivo_avg_ind_1 {
     type: average
     sql: ${TABLE}.objetivo ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/3?Plaza={{ _filters['test_mt_indicadores_medicion.plaza'] | url_encode }}&Region={{ _filters['test_mt_indicadores_medicion.region'] | url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+      url: "/dashboards/3?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"€\"0.00"
   }
@@ -43,22 +43,22 @@ view: test_mt_indicadores_medicion {
     type: string
     sql: ${TABLE}.region ;;
   }
-  dimension: valor {
+  dimension: valor_ind_1 {
     type: number
     sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/3?Plaza={{ _filters['test_mt_indicadores_medicion.plaza'] | url_encode }}&Region={{ _filters['test_mt_indicadores_medicion.region'] | url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+      url: "/dashboards/3?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"€\"0.00"
   }
 
-  measure: valor_avg {
+  measure: valor_avg_ind_1 {
     type: average
     sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/3?Plaza={{ _filters['test_mt_indicadores_medicion.plaza'] | url_encode }}&Region={{ _filters['test_mt_indicadores_medicion.region'] | url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+      url: "/dashboards/3?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"€\"0.00"
   }
@@ -66,12 +66,59 @@ view: test_mt_indicadores_medicion {
     type: count
   }
 
+# --------------------------------------
+# Indicador 10: % Lecturas (Carga)
+# --------------------------------------
+  dimension: objetivo_ind_10 {
+    type: number
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  measure: objetivo_avg_ind_10 {
+    type: average
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  dimension: valor_ind_10 {
+    type: number
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+  # /dashboards/4?Proceso=LLEGADA&Plaza=&Region=&Fecha+Filtro=7+day
+  measure: valor_avg_ind_10 {
+    type: average
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+
+# --------------------------------------
+# Indicador 4: % Lecturas (Carga)
+# --------------------------------------
   dimension: objetivo_ind_4 {
     type: number
     sql: ${TABLE}.objetivo ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/4?Plaza={{ _filters['test_mt_indicadores_medicion.plaza'] | url_encode }}&Region={{ _filters['test_mt_indicadores_medicion.region'] | url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Proceso=LLEGADA"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"%\"0.00"
   }
@@ -81,7 +128,7 @@ view: test_mt_indicadores_medicion {
     sql: ${TABLE}.objetivo ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/4?Plaza={{ _filters['test_mt_indicadores_medicion.plaza'] | url_encode }}&Region={{ _filters['test_mt_indicadores_medicion.region'] | url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Proceso=LLEGADA"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"%\"0.00"
   }
@@ -91,7 +138,7 @@ view: test_mt_indicadores_medicion {
     sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/4?Plaza={{ _filters['test_mt_indicadores_medicion.plaza'] | url_encode }}&Region={{ _filters['test_mt_indicadores_medicion.region'] | url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Proceso=LLEGADA"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"%\"0.00"
   }
@@ -101,7 +148,7 @@ view: test_mt_indicadores_medicion {
     sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/4?Plaza={{ _filters['test_mt_indicadores_medicion.plaza'] | url_encode }}&Region={{ _filters['test_mt_indicadores_medicion.region'] | url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Proceso=LLEGADA"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"%\"0.00"
   }

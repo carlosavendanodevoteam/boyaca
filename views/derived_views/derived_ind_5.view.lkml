@@ -1,5 +1,5 @@
 
-view: derived_ind_4_5_10 {
+view: derived_ind_5 {
   derived_table: {
     sql: SELECT
           p.VIAJ_FECHA_SALIDA as FECHA_FILTRO,
@@ -19,24 +19,15 @@ view: derived_ind_4_5_10 {
 
 
       FROM
-          `datalake-transporte.alertran.v_calidad_lecturas` p
-          INNER JOIN `datalake-transporte.alertran.t_regiones_agencias`  r  -- Si no esta en la tabla de regiones agencias no se muestra
-          ON p.DELE_LEC = r.DELE_CODIGO
-      --Para ind 4
-      -- WHERE
-      --     PROCESO='LLEGADA'
-
-      -- Para ind 5
-      --WHERE
-      --  TIPO_REP_REC='REPARTO'
-        --AND MUELLE = 'N'
-        -- RECADERO = 'N'
-        --AND PRODUCTO IN (Null, 'PR - PREFRENTE', 'GR - GRUPAJE', 'MA - MARITIMO', 'EX - EXCLUSIVO' )
-        --AND NAF NOT IN ('EMG-EMP GRUPO') AND NAF IS NOT Null
-
-    --Para ind 10
-    --WHERE PROCESO='SALIDA'
-    ;;
+      `datalake-transporte.alertran.v_calidad_lecturas` p
+      INNER JOIN `datalake-transporte.alertran.t_regiones_agencias`  r  -- Si no esta en la tabla de regiones agencias no se muestra
+      ON p.DELE_LEC = r.DELE_CODIGO
+      WHERE TIPO_REP_REC='REPARTO'
+      AND MUELLE = 'N'
+       RECADERO = 'N'
+      AND PRODUCTO IN (Null, 'PR - PREFRENTE', 'GR - GRUPAJE', 'MA - MARITIMO', 'EX - EXCLUSIVO' )
+      AND NAF NOT IN ('EMG-EMP GRUPO') AND NAF IS NOT Null
+      ;;
   }
 
 
@@ -140,21 +131,21 @@ view: derived_ind_4_5_10 {
 
   set: detail {
     fields: [
-        fecha_filtro,
-  region,
-  plaza,
-  bult_codigo,
-  bult_codigo_leido,
-  expe_codigo,
-  expe_numero,
-  agencia,
-  viaj_ori,
-  viaj_des,
-  viaj_codigo,
-  cliente,
-  proceso,
-  ruta,
-  encontrado
+      fecha_filtro,
+      region,
+      plaza,
+      bult_codigo,
+      bult_codigo_leido,
+      expe_codigo,
+      expe_numero,
+      agencia,
+      viaj_ori,
+      viaj_des,
+      viaj_codigo,
+      cliente,
+      proceso,
+      ruta,
+      encontrado
     ]
   }
 }
