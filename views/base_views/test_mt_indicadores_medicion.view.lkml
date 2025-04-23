@@ -19,6 +19,10 @@ view: test_mt_indicadores_medicion {
   dimension: objetivo {
     type: number
     sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/3?Plaza={{ _filters['test_mt_indicadores_medicion.plaza'] | url_encode }}&Region={{ _filters['test_mt_indicadores_medicion.region'] | url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
   }
   dimension: plaza {
     type: string
@@ -31,6 +35,11 @@ view: test_mt_indicadores_medicion {
   dimension: valor {
     type: number
     sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/3?Plaza={{ _filters['test_mt_indicadores_medicion.plaza'] | url_encode }}&Region={{ _filters['test_mt_indicadores_medicion.region'] | url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"€\"0.00"
   }
   measure: count {
     type: count
