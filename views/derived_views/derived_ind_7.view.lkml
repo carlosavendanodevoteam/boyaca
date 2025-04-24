@@ -6,8 +6,8 @@ view: derived_ind_7 {
           FECHA_SALIDA                as FECHA_FILTRO,
           r.Region                    as REGION,
           VIAJ_IMPORTE,
-          KILOS_VIAJE,
-          DELE_CODIGO_DES,DELE_NOM_DES
+          DELE_CODIGO_DES,DELE_NOM_DES,
+          DELE_CODIGO_ORI, DELE_NOM_ORI, Paradas, VIAJ_CODIGO, FECHA_SALIDA, CAMI_MATRICULA, REMO_MATRICULA, PRVE_CODIGO_CONDUCTOR, PROVEEDOR_VIAJE, VIAJ_IMPORTE_MANUAL, IMPORTE_PLAN_TRANSPORTE, BULTOS_VIAJE, KILOS_VIAJE, RUTA_KILOMETROS
       FROM
           `datalake-transporte.alertran.v_viajes_report_diario`   p
           INNER JOIN `datalake-transporte.alertran.t_regiones_agencias`  r  -- Si no esta en la tabla de regiones agencias no se muestra
@@ -55,6 +55,96 @@ view: derived_ind_7 {
   dimension: dele_nom_des {
     type: string
     sql: ${TABLE}.DELE_NOM_DES ;;
+  }
+
+  dimension: dele_codigo_ori {
+    type: string
+    sql: ${TABLE}.DELE_CODIGO_ORI ;;
+  }
+
+  dimension: dele_nom_ori {
+    type: string
+    sql: ${TABLE}.DELE_NOM_ORI ;;
+  }
+
+  dimension: paradas {
+    type: string
+    sql: ${TABLE}.Paradas ;;
+  }
+
+  dimension: viaj_codigo {
+    type: string
+    sql: ${TABLE}.VIAJ_CODIGO ;;
+  }
+
+  dimension: cami_matricula {
+    type: string
+    sql: ${TABLE}.CAMI_MATRICULA ;;
+  }
+
+  dimension: remo_matricula {
+    type: string
+    sql: ${TABLE}.REMO_MATRICULA ;;
+  }
+
+  dimension: prve_codigo_conductor {
+    type: string
+    sql: ${TABLE}.PRVE_CODIGO_CONDUCTOR ;;
+  }
+
+  dimension: proovedor_viaje {
+    type: string
+    sql: ${TABLE}.PROVEEDOR_VIAJE ;;
+  }
+
+  dimension: viaj_importe_manual {
+    type: string
+    sql: ${TABLE}.VIAJ_IMPORTE_MANUAL ;;
+  }
+
+  dimension: importe_plan_transporte {
+    type: string
+    sql: ${TABLE}.IMPORTE_PLAN_TRANSPORTE ;;
+  }
+
+  dimension: bultos_viaje {
+    type: string
+    sql: ${TABLE}.BULTOS_VIAJE ;;
+  }
+
+  dimension: ruta_kilometros {
+    type: string
+    sql: ${TABLE}.RUTA_KILOMETROS ;;
+  }
+
+  measure: sum_importe {
+    type: sum
+    sql: ${TABLE}.VIAJ_IMPORTE ;;
+  }
+
+  measure: sum_importe_manual {
+    type: sum
+    sql: ${TABLE}.VIAJ_IMPORTE_MANUAL ;;
+  }
+
+  measure: sum_importe_plan_transporte {
+    type: sum
+    sql: ${TABLE}.IMPORTE_PLAN_TRANSPORTE;;
+  }
+
+  measure: sum_bultos {
+    type: sum
+    sql: ${TABLE}.BULTOS_VIAJE;;
+  }
+
+  measure: sum_kilos {
+    type: sum
+    sql: ${TABLE}.KILOS_VIAJE;;
+  }
+
+  measure: sum_km {
+    type: sum
+    sql: ${TABLE}.RUTA_KILOMETROS;;
   }
 
   set: detail {

@@ -16,6 +16,24 @@ view: test_mt_indicadores_medicion {
     type: number
     sql: ${TABLE}.id_indicador ;;
   }
+
+  measure: count {
+    type: count
+  }
+  dimension: plaza {
+    type: string
+    sql: ${TABLE}.plaza ;;
+  }
+  dimension: region {
+    type: string
+    sql: ${TABLE}.region ;;
+  }
+
+
+
+# --------------------------------------
+# Indicador 1: € Tonelada de Reparto y Recogida
+# --------------------------------------
   dimension: objetivo_ind_1 {
     type: number
     sql: ${TABLE}.objetivo ;;
@@ -35,14 +53,7 @@ view: test_mt_indicadores_medicion {
     }
     value_format: "\"€\"0.00"
   }
-  dimension: plaza {
-    type: string
-    sql: ${TABLE}.plaza ;;
-  }
-  dimension: region {
-    type: string
-    sql: ${TABLE}.region ;;
-  }
+
   dimension: valor_ind_1 {
     type: number
     sql: ${TABLE}.VALOR ;;
@@ -62,9 +73,9 @@ view: test_mt_indicadores_medicion {
     }
     value_format: "\"€\"0.00"
   }
-  measure: count {
-    type: count
-  }
+
+
+
 
 # --------------------------------------
 # Indicador 2: € Expedición
@@ -108,6 +119,53 @@ view: test_mt_indicadores_medicion {
     }
     value_format: "\"€\"0.00"
   }
+
+
+
+# --------------------------------------
+# Indicador 4: % Lecturas (Descarga)
+# --------------------------------------
+  dimension: objetivo_ind_4 {
+    type: number
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  measure: objetivo_avg_ind_4 {
+    type: average
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  dimension: valor_ind_4 {
+    type: number
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  measure: valor_avg_ind_4 {
+    type: average
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+
 
 # --------------------------------------
 # Indicador 5: % Confirmación Entrega
@@ -197,6 +255,91 @@ view: test_mt_indicadores_medicion {
   }
 
 
+
+# --------------------------------------
+# Indicador 7: € Tonelada Arrastre
+# --------------------------------------
+  dimension: objetivo_ind_7 {
+    type: number
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/11?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"€\"0.00"
+  }
+
+  measure: objetivo_avg_ind_7 {
+    type: average
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/11?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"€\"0.00"
+  }
+
+  dimension: valor_ind_7 {
+    type: number
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/11?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"€\"0.00"
+  }
+
+  measure: valor_avg_ind_7 {
+    type: average
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/11?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"€\"0.00"
+  }
+
+
+
+# --------------------------------------
+# Indicador 12: Índice de Ocupación
+# --------------------------------------
+  dimension: objetivo_ind_9 {
+    type: number
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/12?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+  }
+
+  measure: objetivo_avg_ind_9 {
+    type: average
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/12?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+  }
+
+  dimension: valor_ind_9 {
+    type: number
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/12?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+  }
+
+  measure: valor_avg_ind_9 {
+    type: average
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/12?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+  }
+
 # --------------------------------------
 # Indicador 10: % Lecturas (Carga)
 # --------------------------------------
@@ -241,46 +384,5 @@ view: test_mt_indicadores_medicion {
   }
 
 
-# --------------------------------------
-# Indicador 4: % Lecturas (Descarga)
-# --------------------------------------
-  dimension: objetivo_ind_4 {
-    type: number
-    sql: ${TABLE}.objetivo ;;
-    link: {
-      label: "Detalle"
-      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
-    }
-    value_format: "\"%\"0.00"
-  }
 
-  measure: objetivo_avg_ind_4 {
-    type: average
-    sql: ${TABLE}.objetivo ;;
-    link: {
-      label: "Detalle"
-      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
-    }
-    value_format: "\"%\"0.00"
-  }
-
-  dimension: valor_ind_4 {
-    type: number
-    sql: ${TABLE}.VALOR ;;
-    link: {
-      label: "Detalle"
-      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
-    }
-    value_format: "\"%\"0.00"
-  }
-
-  measure: valor_avg_ind_4 {
-    type: average
-    sql: ${TABLE}.VALOR ;;
-    link: {
-      label: "Detalle"
-      url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
-    }
-    value_format: "\"%\"0.00"
-  }
 }
