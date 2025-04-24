@@ -119,7 +119,7 @@ view: test_mt_indicadores_medicion {
       label: "Detalle"
       url: "/dashboards/9?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
-    value_format: "\"€\"0.00"
+    value_format: "\"%\"0.00"
   }
 
   measure: objetivo_avg_ind_5 {
@@ -129,7 +129,7 @@ view: test_mt_indicadores_medicion {
       label: "Detalle"
       url: "/dashboards/9?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
-    value_format: "\"€\"0.00"
+    value_format: "\"%\"0.00"
   }
 
   dimension: valor_ind_5 {
@@ -139,7 +139,7 @@ view: test_mt_indicadores_medicion {
       label: "Detalle"
       url: "/dashboards/9?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
-    value_format: "\"€\"0.00"
+    value_format: "\"%\"0.00"
   }
 
   measure: valor_avg_ind_5 {
@@ -149,7 +149,7 @@ view: test_mt_indicadores_medicion {
       label: "Detalle"
       url: "/dashboards/9?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
-    value_format: "\"€\"0.00"
+    value_format: "\"%\"0.00"
   }
 
 
