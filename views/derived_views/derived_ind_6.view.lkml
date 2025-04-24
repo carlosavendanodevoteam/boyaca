@@ -11,11 +11,9 @@ view: derived_ind_6 {
               Expe_numero,
               NULL
           ) as Expe_en_objetivo,
-          EXPE_CODIGO, EXPE_PESO_OCUPACION,
-          expe_peso_expedicion,
-          expe_no_clasificable_c,
-          expe_antes_fecha_objetivo_c,
-          expe_en_fecha_objetivo_c
+          EXPE_CODIGO,
+          EXPE_REFERENCIA_UCAR, Clie_cent_codigo_nom_ori, TIPA_DESCRIPCION, EXPE_NOMBRE_DESTINO
+
       FROM
           `datalake-transporte.alertran.t_treal_calidad_recibida`   p
           INNER JOIN `datalake-transporte.alertran.t_regiones_agencias`  r  -- Si no esta en la tabla de regiones agencias no se muestra
@@ -66,91 +64,30 @@ view: derived_ind_6 {
     sql: ${TABLE}.EXPE_CODIGO ;;
   }
 
-  dimension: expe_peso_ocupacion {
+  dimension: ucar {
     type: number
-    sql: ${TABLE}.EXPE_PESO_OCUPACION ;;
+    sql: ${TABLE}.EXPE_REFERENCIA_UCAR ;;
   }
 
-  dimension: expe_peso_expedicion {
+  dimension: cliente_origen {
     type: number
-    sql: ${TABLE}.expe_peso_expedicion ;;
+    sql: ${TABLE}.Clie_cent_codigo_nom_ori ;;
   }
 
-  dimension: expe_no_clasificable_c {
+  dimension: naf {
     type: number
-    sql: ${TABLE}.expe_no_clasificable_c ;;
+    sql: ${TABLE}.TIPA_DESCRIPCION ;;
   }
 
-  dimension: expe_antes_fecha_objetivo_c {
+  dimension: consignatario {
     type: number
-    sql: ${TABLE}.expe_antes_fecha_objetivo_c ;;
+    sql: ${TABLE}.EXPE_NOMBRE_DESTINO ;;
   }
 
-  dimension: expe_en_fecha_objetivo_c {
-    type: number
-    sql: ${TABLE}.expe_en_fecha_objetivo_c ;;
-  }
 
 
   measure: count {
     type: count
-    drill_fields: [detail*]
   }
 
-  measure: exp_totales {
-    type: count_distinct
-    sql: ${TABLE}.EXPE_CODIGO ;;
-  }
-
-  measure: exp_num_classif {
-    type: count_distinct
-    sql:  IF(${expe_no_clasificable_c} = 1, ${expe_codigo}, NULL) ;;
-  }
-
-  measure: prkgs {
-    label: "PRKgs"
-    type: sum
-    sql:  ${expe_peso_expedicion} ;;
-  }
-
-  measure: antes {
-    type: count_distinct
-    sql: IF(${expe_antes_fecha_objetivo_c} = 1, ${expe_numero}, NULL) ;;
-  }
-
-  measure: porc_antes {
-    type: number
-    sql: ${antes}/COUNT(DISTINCT ${expe_numero});;
-  }
-
-  measure: obj {
-    type: count_distinct
-    sql: IF(${expe_en_fecha_objetivo_c} = 1, ${expe_numero}, NULL) ;;
-  }
-
-  measure: porc_obj {
-    type: number
-    sql: ${obj}/COUNT(DISTINCT ${expe_numero});;
-  }
-
-  measure: Expe_en_objetivo {
-    type: count_distinct
-    sql: Expe_en_objetivo ;;
-  }
-
-  set: detail {
-    fields: [
-        fecha_filtro,
-  region,
-  expe_numero,
-  plaza,
-  expe_en_objetivo,
-  expe_codigo,
-  expe_peso_ocupacion,
-  expe_peso_expedicion,
-  expe_no_clasificable_c,
-  expe_antes_fecha_objetivo_c,
-  expe_en_fecha_objetivo_c
-    ]
-  }
 }

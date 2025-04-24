@@ -31,9 +31,10 @@ explore: mt_indicadores_medicion {}
 
 explore: t_regiones_agencias {}
 
-explore: derived_ind_1_2 {}
+explore: derived_ind_1 {}
 explore: derived_ind_2 {}
 explore: derived_ind_4 {}
 explore: derived_ind_5 {}
+explore: derived_ind_6 {}
 explore: derived_ind_10 {}
 explore: test_mt_indicadores_medicion {}
