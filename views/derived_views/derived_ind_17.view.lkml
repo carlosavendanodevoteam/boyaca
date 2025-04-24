@@ -7,7 +7,7 @@ view: derived_ind_17 {
           CONCAT(p.DELE_CODIGO, " - " , r.Nombre," - ",r.Region) AS PLAZA,
           p.ORTR_CODIGO,
           p.CIERRE_OK,
-          DELEGACION, PROVEEDOR, REPARTIDOR
+          p.DELEGACION, p.PROVEEDOR, p.REPARTIDOR
 
       FROM
           --`datalake-transporte.alertran.v_liq_reprec` p
