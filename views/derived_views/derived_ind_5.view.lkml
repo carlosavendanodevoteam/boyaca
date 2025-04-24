@@ -1,32 +1,23 @@
-
 view: derived_ind_5 {
   derived_table: {
     sql: SELECT
-          p.VIAJ_FECHA_SALIDA as FECHA_FILTRO,
-          r.Region as REGION,
-          CONCAT(p.DELE_LEC, " - " , r.Nombre," - ",r.Region) AS PLAZA,
-          p.BULT_CODIGO,
-          IF(p.ENCONTRADO='S', p.BULT_CODIGO, NULL) as BULT_CODIGO_leido,
-          EXPE_CODIGO,
-          EXPE_NUMERO,
-          DELE_LECT,
-          VIAJ_CODIGO,
-          VIAJ_ORI,
-          VIAJ_DES,
-          CLIENTE,
-          PROCESO,
-          ENCONTRADO
+    ORTR_FECHA as FECHA_FILTRO,
+    r.Region as REGION,
+    CONCAT(DELE_LECT, " - " , r.Nombre," - ",r.Region) AS PLAZA,
+    NUM_BULTOS,
+    NUM_BULTOS_CONF
 
+FROM
+    `datalake-transporte.alertran.v_repartidores_lecturas`  p
+    INNER JOIN `datalake-transporte.alertran.t_regiones_agencias`  r  -- Si no esta en la tabla de regiones agencias no se muestra
+    ON p.DELE_LECT = r.DELE_CODIGO
 
-      FROM
-      `datalake-transporte.alertran.v_calidad_lecturas` p
-      INNER JOIN `datalake-transporte.alertran.t_regiones_agencias`  r  -- Si no esta en la tabla de regiones agencias no se muestra
-      ON p.DELE_LEC = r.DELE_CODIGO
-      WHERE TIPO_REP_REC='REPARTO'
-      AND MUELLE = 'N'
-       RECADERO = 'N'
-      AND PRODUCTO IN (Null, 'PR - PREFRENTE', 'GR - GRUPAJE', 'MA - MARITIMO', 'EX - EXCLUSIVO' )
-      AND NAF NOT IN ('EMG-EMP GRUPO') AND NAF IS NOT Null
+WHERE
+        TIPO_REP_REC='REPARTO'
+    AND MUELLE = 'N'
+    AND RECADERO = 'N'
+    AND PRODUCTO IN (Null, 'PR - PREFRENTE', 'GR - GRUPAJE', 'MA - MARITIMO', 'EX - EXCLUSIVO' )
+    AND NAF NOT IN ('EMG-EMP GRUPO') AND NAF IS NOT Null
       ;;
   }
 
