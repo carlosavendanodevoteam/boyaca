@@ -18,7 +18,7 @@ view: derived_ind_17 {
           ON rr.CODIGO_REP_REC = p.RERE_CODIGO
 
       WHERE
-          rr.RERE_REP_REC NOT IN ('4')  --RECADERO='N' ;;
+          rr.RERE_REP_REC NOT IN ('4') ;;
   }
 
   measure: count {
