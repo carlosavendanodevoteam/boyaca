@@ -383,6 +383,48 @@ view: test_mt_indicadores_medicion {
     value_format: "\"%\"0.00"
   }
 
+# --------------------------------------
+# Indicador 17: % Cierres de O.T.
+# --------------------------------------
+  dimension: objetivo_ind_17 {
+    type: number
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/13?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  measure: objetivo_avg_ind_17 {
+    type: average
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/13?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  dimension: valor_ind_17 {
+    type: number
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/13?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  measure: valor_avg_ind_17 {
+    type: average
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/13?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
 
 
 }

@@ -1,28 +1,28 @@
 
 view: derived_ind_17 {
   derived_table: {
-    sql: SELECT  
+    sql: SELECT
           p.ORTR_FECHA  as FECHA_FILTRO,
           r.Region as REGION,
           CONCAT(p.DELE_CODIGO, " - " , r.Nombre," - ",r.Region) AS PLAZA,
           p.ORTR_CODIGO,
-          p.CIERRE_OK
-      
-      FROM 
+          p.CIERRE_OK,
+          DELEGACION, PROVEEDOR, REPARTIDOR
+
+      FROM
           --`datalake-transporte.alertran.v_liq_reprec` p
           `datalake-transporte.alertran.v_ordenes_trabajo_rere` p
           INNER JOIN `datalake-transporte.alertran.t_regiones_agencias`  r  -- Si no esta en la tabla de regiones agencias no se muestra
           ON p.DELE_CODIGO = r.DELE_CODIGO
           LEFT JOIN `datalake-transporte.alertran.t_repartidores_recogedores` rr
           ON rr.CODIGO_REP_REC = p.RERE_CODIGO
-       
-      WHERE 
+
+      WHERE
           rr.RERE_REP_REC NOT IN ('4')  --RECADERO='N' ;;
   }
 
   measure: count {
     type: count
-    drill_fields: [detail*]
   }
 
   dimension: fecha_filtro {
@@ -51,13 +51,20 @@ view: derived_ind_17 {
     sql: ${TABLE}.CIERRE_OK ;;
   }
 
-  set: detail {
-    fields: [
-        fecha_filtro,
-	region,
-	plaza,
-	ortr_codigo,
-	cierre_ok
-    ]
+
+  dimension: delegacion {
+    type: string
+    sql: ${TABLE}.DELEGACION ;;
   }
+
+  dimension: proovedor {
+    type: string
+    sql: ${TABLE}.PROVEEDOR ;;
+  }
+
+  dimension: repartidor {
+    type: string
+    sql: ${TABLE}.REPARTIDOR ;;
+  }
+
 }
