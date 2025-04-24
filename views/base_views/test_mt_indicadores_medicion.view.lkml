@@ -110,7 +110,7 @@ view: test_mt_indicadores_medicion {
   }
 
 # --------------------------------------
-# Indicador 2: € Expedición
+# Indicador 5: % Confirmación Entrega
 # --------------------------------------
   dimension: objetivo_ind_5 {
     type: number
@@ -150,6 +150,50 @@ view: test_mt_indicadores_medicion {
       url: "/dashboards/9?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
     }
     value_format: "\"€\"0.00"
+  }
+
+
+# --------------------------------------
+# Indicador 6: % Plazo y Ventana Horaria
+# --------------------------------------
+  dimension: objetivo_ind_6 {
+    type: number
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/10?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  measure: objetivo_avg_ind_6 {
+    type: average
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/10?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  dimension: valor_ind_6 {
+    type: number
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/10?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  measure: valor_avg_ind_6 {
+    type: average
+    sql: ${TABLE}.VALOR ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/10?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}"
+    }
+    value_format: "\"%\"0.00"
   }
 
 
