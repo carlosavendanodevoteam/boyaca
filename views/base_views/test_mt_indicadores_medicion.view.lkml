@@ -5,6 +5,7 @@ view: test_mt_indicadores_medicion {
     type: string
     sql: ${TABLE}.AMBITO ;;
   }
+
   dimension_group: fecha_filtro {
     type: time
     timeframes: [raw, date, week, month, quarter, year]
@@ -12,6 +13,7 @@ view: test_mt_indicadores_medicion {
     datatype: date
     sql: ${TABLE}.FECHA_FILTRO ;;
   }
+
   dimension: id_indicador {
     type: number
     sql: ${TABLE}.id_indicador ;;
@@ -20,10 +22,12 @@ view: test_mt_indicadores_medicion {
   measure: count {
     type: count
   }
+
   dimension: plaza {
     type: string
     sql: ${TABLE}.plaza ;;
   }
+
   dimension: region {
     type: string
     sql: ${TABLE}.region ;;
@@ -302,7 +306,7 @@ view: test_mt_indicadores_medicion {
 
 
 # --------------------------------------
-# Indicador 12: Índice de Ocupación
+# Indicador 9: Índice de Ocupación
 # --------------------------------------
   dimension: objetivo_ind_9 {
     type: number
