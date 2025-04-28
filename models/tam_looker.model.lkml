@@ -41,3 +41,8 @@ explore: derived_ind_9 {}
 explore: derived_ind_17 {}
 explore: derived_ind_10 {}
 explore: test_mt_indicadores_medicion {}
+
+
+map_layer: provincias {
+  file: "/maps/spain-provinces-geo_.geojson"
+}

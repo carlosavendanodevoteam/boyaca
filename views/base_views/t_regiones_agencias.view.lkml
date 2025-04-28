@@ -35,6 +35,13 @@ view: t_regiones_agencias {
     type: string
     sql: ${TABLE}.Region ;;
   }
+
+  dimension: ubi_agencia {
+    type: location
+    sql_latitude: ${TABLE}.LATITUD ;;
+    sql_longitude: ${TABLE}.LONGITUD ;;
+  }
+
   measure: count {
     type: count
   }
