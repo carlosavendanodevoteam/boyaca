@@ -42,7 +42,7 @@ view: test_mt_indicadores_medicion {
     type: number
     sql: ${TABLE}.objetivo ;;
     link: {
-      label: "Detalle"
+      label: "Detalle "
       url: "/dashboards/3?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
     }
     value_format: "\"€\"0.00"
