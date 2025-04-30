@@ -158,7 +158,7 @@ view: test_mt_indicadores_medicion {
 
   dimension: valor_ind_4 {
     type: number
-    sql: ${TABLE}.VALOR ;;
+    sql: ${TABLE}.VALOR * 100;;
     link: {
       label: "Detalle"
       url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -168,7 +168,7 @@ view: test_mt_indicadores_medicion {
 
   measure: valor_avg_ind_4 {
     type: average
-    sql: ${TABLE}.VALOR ;;
+    sql: ${TABLE}.VALOR * 100;;
     link: {
       label: "Detalle"
       url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -247,7 +247,7 @@ view: test_mt_indicadores_medicion {
 
   dimension: valor_ind_6 {
     type: number
-    sql: ${TABLE}.VALOR ;;
+    sql: ${TABLE}.VALOR * 100;;
     link: {
       label: "Detalle"
       url: "/dashboards/10?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -257,7 +257,7 @@ view: test_mt_indicadores_medicion {
 
   measure: valor_avg_ind_6 {
     type: average
-    sql: ${TABLE}.VALOR ;;
+    sql: ${TABLE}.VALOR * 100;;
     link: {
       label: "Detalle"
       url: "/dashboards/10?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -376,7 +376,7 @@ view: test_mt_indicadores_medicion {
 
   dimension: valor_ind_10 {
     type: number
-    sql: ${TABLE}.VALOR ;;
+    sql: ${TABLE}.VALOR * 100;;
     link: {
       label: "Detalle"
       url: "/dashboards/7?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -386,7 +386,7 @@ view: test_mt_indicadores_medicion {
 
   measure: valor_avg_ind_10 {
     type: average
-    sql: ${TABLE}.VALOR ;;
+    sql: ${TABLE}.VALOR * 100 ;;
     link: {
       label: "Detalle"
       url: "/dashboards/7?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -419,7 +419,7 @@ view: test_mt_indicadores_medicion {
 
   dimension: valor_ind_17 {
     type: number
-    sql: ${TABLE}.VALOR ;;
+    sql: ${TABLE}.VALOR * 100;;
     link: {
       label: "Detalle"
       url: "/dashboards/13?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -429,7 +429,7 @@ view: test_mt_indicadores_medicion {
 
   measure: valor_avg_ind_17 {
     type: average
-    sql: ${TABLE}.VALOR ;;
+    sql: ${TABLE}.VALOR * 100;;
     link: {
       label: "Detalle"
       url: "/dashboards/13?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
