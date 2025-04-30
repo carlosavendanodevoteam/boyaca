@@ -33,6 +33,13 @@ view: test_mt_indicadores_medicion {
     sql: ${TABLE}.region ;;
   }
 
+  dimension: cod_provincia {
+    type: string
+    sql: ${TABLE}.cod_provincia ;;
+    map_layer_name: provincias
+  }
+
+
 
 
 # --------------------------------------
