@@ -527,7 +527,7 @@ view: test_mt_indicadores_medicion {
     type: number
     sql:
     CASE
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_1' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = 'valor_ind_2' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = 'valor_ind_4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
       WHEN {% parameter filtro_indicador %} = 'valor_ind_5' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
@@ -551,7 +551,7 @@ view: test_mt_indicadores_medicion {
     type: number
     sql:
     CASE
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_1' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = 'valor_ind_2' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = 'valor_ind_4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = 'valor_ind_5' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.objetivo
