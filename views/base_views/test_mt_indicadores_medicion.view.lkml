@@ -470,6 +470,11 @@ view: test_mt_indicadores_medicion {
       value: "8"
     }
     allowed_value: {
+      label: "% de Enrutamiento"
+      # value: "valor_ind_2"
+      value: "17"
+    }
+    allowed_value: {
       label: "% Lecturas (Descarga)"
       # value: "valor_ind_4"
       value: "4"
@@ -514,6 +519,7 @@ view: test_mt_indicadores_medicion {
     CASE
       WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
       WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
@@ -536,6 +542,7 @@ view: test_mt_indicadores_medicion {
     CASE
       WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
       WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
@@ -559,6 +566,7 @@ view: test_mt_indicadores_medicion {
     CASE
       WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.objetivo
@@ -577,6 +585,7 @@ view: test_mt_indicadores_medicion {
     CASE
       WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN "€ Tonelada de Reparto y Recogida"
       WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN "€ Expedición"
+      WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN "% de Enrutamiento"
       WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN "% Lecturas (Descarga)"
       WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN "% Confirmación Entrega"
       WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN "% Plazo y Ventana Horaria"
