@@ -106,7 +106,6 @@ view: derived_ind_10 {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
   }
 
   measure: num_bultos {
@@ -124,24 +123,4 @@ view: derived_ind_10 {
     sql:  CASE WHEN ${encontrado} = 'N' THEN ${bult_codigo} ELSE NULL END;;
   }
 
-
-  set: detail {
-    fields: [
-      fecha_filtro,
-      region,
-      plaza,
-      bult_codigo,
-      bult_codigo_leido,
-      expe_codigo,
-      expe_numero,
-      agencia,
-      viaj_ori,
-      viaj_des,
-      viaj_codigo,
-      cliente,
-      proceso,
-      ruta,
-      encontrado
-    ]
-  }
 }

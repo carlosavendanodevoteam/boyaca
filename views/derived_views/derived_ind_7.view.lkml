@@ -18,7 +18,6 @@ view: derived_ind_7 {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
   }
 
   dimension: plaza {
@@ -147,15 +146,4 @@ view: derived_ind_7 {
     sql: ${TABLE}.RUTA_KILOMETROS;;
   }
 
-  set: detail {
-    fields: [
-        plaza,
-  fecha_filtro,
-  region,
-  viaj_importe,
-  kilos_viaje,
-  dele_codigo_des,
-  dele_nom_des
-    ]
-  }
 }

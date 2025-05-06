@@ -28,7 +28,6 @@ WHERE
 
   measure: count {
     type: count
-    drill_fields: [detail*]
   }
 
   dimension: fecha_filtro {
@@ -72,16 +71,4 @@ WHERE
     sql: ${TABLE}.EXPE_PESO_OCUPACION ;;
   }
 
-  set: detail {
-    fields: [
-      fecha_filtro,
-      region,
-      plaza,
-      expe_codigo,
-      expe_numero,
-      coste_expedicion,
-      coste_sarr_expedicion,
-      expe_peso_ocupacion
-    ]
-  }
 }

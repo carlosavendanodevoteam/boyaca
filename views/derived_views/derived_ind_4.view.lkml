@@ -22,17 +22,6 @@ view: derived_ind_4 {
           INNER JOIN `datalake-transporte.alertran.t_regiones_agencias`  r  -- Si no esta en la tabla de regiones agencias no se muestra
           ON p.DELE_LEC = r.DELE_CODIGO
          WHERE PROCESO='LLEGADA'
-
-      -- Para ind 5
-      --WHERE
-      --  TIPO_REP_REC='REPARTO'
-        --AND MUELLE = 'N'
-        -- RECADERO = 'N'
-        --AND PRODUCTO IN (Null, 'PR - PREFRENTE', 'GR - GRUPAJE', 'MA - MARITIMO', 'EX - EXCLUSIVO' )
-        --AND NAF NOT IN ('EMG-EMP GRUPO') AND NAF IS NOT Null
-
-    --Para ind 10
-    --WHERE PROCESO='SALIDA'
     ;;
   }
 
@@ -116,7 +105,6 @@ view: derived_ind_4 {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
   }
 
   measure: num_bultos {
@@ -134,24 +122,4 @@ view: derived_ind_4 {
     sql:  CASE WHEN ${encontrado} = 'N' THEN ${bult_codigo} ELSE NULL END;;
   }
 
-
-  set: detail {
-    fields: [
-        fecha_filtro,
-  region,
-  plaza,
-  bult_codigo,
-  bult_codigo_leido,
-  expe_codigo,
-  expe_numero,
-  agencia,
-  viaj_ori,
-  viaj_des,
-  viaj_codigo,
-  cliente,
-  proceso,
-  ruta,
-  encontrado
-    ]
-  }
 }
