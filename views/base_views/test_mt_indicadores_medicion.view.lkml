@@ -447,48 +447,6 @@ view: test_mt_indicadores_medicion {
     }
     allowed_value: {
       label: "€ Expedición"
-      value: "valor_ind_2"
-    }
-    allowed_value: {
-      label: "% Lecturas (Descarga)"
-      value: "valor_ind_4"
-    }
-    allowed_value: {
-      label: "% Confirmación Entrega"
-      value: "valor_ind_5"
-    }
-    allowed_value: {
-      label: "% Plazo y Ventana Horaria"
-      value: "valor_ind_6"
-    }
-    allowed_value: {
-      label: "€ Tonelada Arrastre"
-      value: "valor_ind_7"
-    }
-    allowed_value: {
-      label: "Índice de Ocupación"
-      value: "valor_ind_9"
-    }
-    allowed_value: {
-      label: "% Lecturas (Carga)"
-      value: "valor_ind_10"
-    }
-    allowed_value: {
-      label: "% Cierres de O.T."
-      value: "valor_ind_17"
-    }
-  }
-
-  parameter: filtro_url {
-    label: "Elige indicador"
-    type: string
-    allowed_value: {
-      label: "€ Tonelada de Reparto y Recogida"
-      # value: "valor_ind_1"
-      value: "3"
-    }
-    allowed_value: {
-      label: "€ Expedición"
       # value: "valor_ind_2"
       value: "8"
     }
@@ -499,43 +457,51 @@ view: test_mt_indicadores_medicion {
     }
     allowed_value: {
       label: "% Confirmación Entrega"
-      value: "valor_ind_5"
+      # value: "valor_ind_5"
+      value: "9"
     }
     allowed_value: {
       label: "% Plazo y Ventana Horaria"
-      value: "valor_ind_6"
+      # value: "valor_ind_6"
+      value: "10"
     }
     allowed_value: {
       label: "€ Tonelada Arrastre"
-      value: "valor_ind_7"
+      # value: "valor_ind_7"
+      value: "11"
     }
     allowed_value: {
       label: "Índice de Ocupación"
-      value: "valor_ind_9"
+      # value: "valor_ind_9"
+      value: "12"
     }
     allowed_value: {
       label: "% Lecturas (Carga)"
-      value: "valor_ind_10"
+      # value: "valor_ind_10"
+      value: "7"
     }
     allowed_value: {
       label: "% Cierres de O.T."
-      value: "valor_ind_17"
+      # value: "valor_ind_17"
+      value: "13"
     }
   }
+
+
 
   dimension: valor_indicador_dinamico {
     type: number
     sql:
     CASE
       WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_2' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_5' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_6' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_7' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_9' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_10' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR * 100
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_17' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
       ELSE NULL
     END ;;
     link: {
@@ -544,22 +510,21 @@ view: test_mt_indicadores_medicion {
     }
     value_format: "0.00"
   }
-  # https://boyaca.cloud.looker.com/dashboards/16?Fecha=7+day&Elige+indicador=valor%5E_ind%5E_2&Ambito=
-  # https://boyaca.cloud.looker.com/dashboards/%27valor_ind_2%27?Plaza=&Region=Loeches&Fecha+Expediciones=7+day&Fecha+Tendencias=7+day
+
 
   dimension: objetivo_indicador_dinamico {
     type: number
     sql:
     CASE
       WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.objetivo
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_2' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.objetivo
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.objetivo
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_5' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.objetivo
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_6' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.objetivo
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_7' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.objetivo
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_9' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.objetivo
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_10' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.objetivo
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_17' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.objetivo
       ELSE NULL
     END ;;
     value_format: "0.00"
