@@ -153,6 +153,50 @@ view: test_mt_indicadores_medicion {
 
 
 # --------------------------------------
+# Indicador 3: % de Enrutamiento
+# --------------------------------------
+  dimension: objetivo_ind_3 {
+    type: number
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/17?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  measure: objetivo_avg_ind_3 {
+    type: average
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/17?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  dimension: valor_ind_3 {
+    type: number
+    sql: ${TABLE}.VALOR * 100;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/17?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  measure: valor_avg_ind_3 {
+    type: average
+    sql: ${TABLE}.VALOR * 100;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/17?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+
+# --------------------------------------
 # Indicador 4: % Lecturas (Descarga)
 # --------------------------------------
   dimension: objetivo_ind_4 {
