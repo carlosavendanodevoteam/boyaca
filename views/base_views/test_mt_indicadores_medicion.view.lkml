@@ -531,7 +531,7 @@ view: test_mt_indicadores_medicion {
   }
 
   dimension: nombre_indicador_dinamico {
-    type: number
+    type: string
     sql:
     CASE
       WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN "€ Tonelada de Reparto y Recogida"
@@ -545,7 +545,6 @@ view: test_mt_indicadores_medicion {
       WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN "% Cierres de O.T."
       ELSE NULL
     END ;;
-    value_format: "0.00"
   }
 
 
