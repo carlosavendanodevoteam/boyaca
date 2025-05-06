@@ -40,13 +40,13 @@ view: test_mt_indicadores_medicion {
   }
 
   dimension: objetivo {
-    type: string
+    type: number
     sql: ${TABLE}.objetivo ;;
     map_layer_name: provincias
   }
 
   dimension: valor {
-    type: string
+    type: number
     sql: ${TABLE}.valor ;;
     map_layer_name: provincias
   }
