@@ -39,13 +39,13 @@ view: test_mt_indicadores_medicion {
     map_layer_name: provincias
   }
 
-  measure: objetivo {
+  measure: objetivo_medio {
     type: average
     sql: ${TABLE}.objetivo ;;
     value_format: "0.00"
   }
 
-  measure: valor {
+  measure: valor_medio {
     type: average
     sql: ${TABLE}.valor ;;
     value_format: "0.00"
