@@ -539,10 +539,12 @@ view: test_mt_indicadores_medicion {
     END ;;
     link: {
       label: "Detalle"
-      url: "/dashboards/{{ filtro_indicador._parameter_value | url_encode }}?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
+      url: "/dashboards/valor{{ filtro_indicador._parameter_value | url_encode }}?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
     }
     value_format: "0.00"
   }
+  # https://boyaca.cloud.looker.com/dashboards/16?Fecha=7+day&Elige+indicador=valor%5E_ind%5E_2&Ambito=
+  # https://boyaca.cloud.looker.com/dashboards/%27valor_ind_2%27?Plaza=&Region=Loeches&Fecha+Expediciones=7+day&Fecha+Tendencias=7+day
 
   dimension: objetivo_indicador_dinamico {
     type: number
@@ -561,6 +563,7 @@ view: test_mt_indicadores_medicion {
     END ;;
     value_format: "0.00"
   }
+
 
 
 
