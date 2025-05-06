@@ -508,7 +508,7 @@ view: test_mt_indicadores_medicion {
       WHEN {% parameter filtro_indicador %} = 'valor_ind_7' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = 'valor_ind_9' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = 'valor_ind_10' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.objetivo
-      WHEN {% parameter filtro_indicador %} = 'valor_ind_17' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.objetivo * 100
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_17' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.objetivo
       ELSE NULL
     END ;;
     value_format: "0.00"
