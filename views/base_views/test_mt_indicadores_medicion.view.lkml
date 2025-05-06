@@ -530,7 +530,23 @@ view: test_mt_indicadores_medicion {
     value_format: "0.00"
   }
 
-
+  dimension: nombre_indicador_dinamico {
+    type: number
+    sql:
+    CASE
+      WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN "€ Tonelada de Reparto y Recogida"
+      WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN "€ Expedición"
+      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN "% Lecturas (Descarga)"
+      WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN "% Confirmación Entrega"
+      WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN "% Plazo y Ventana Horaria"
+      WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN "€ Tonelada Arrastre"
+      WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN "Índice de Ocupación"
+      WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN "% Lecturas (Carga)"
+      WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN "% Cierres de O.T."
+      ELSE NULL
+    END ;;
+    value_format: "0.00"
+  }
 
 
 
