@@ -478,6 +478,50 @@ view: test_mt_indicadores_medicion {
     }
   }
 
+  parameter: filtro_url {
+    label: "Elige indicador"
+    type: string
+    allowed_value: {
+      label: "€ Tonelada de Reparto y Recogida"
+      # value: "valor_ind_1"
+      value: "3"
+    }
+    allowed_value: {
+      label: "€ Expedición"
+      # value: "valor_ind_2"
+      value: "8"
+    }
+    allowed_value: {
+      label: "% Lecturas (Descarga)"
+      # value: "valor_ind_4"
+      value: "4"
+    }
+    allowed_value: {
+      label: "% Confirmación Entrega"
+      value: "valor_ind_5"
+    }
+    allowed_value: {
+      label: "% Plazo y Ventana Horaria"
+      value: "valor_ind_6"
+    }
+    allowed_value: {
+      label: "€ Tonelada Arrastre"
+      value: "valor_ind_7"
+    }
+    allowed_value: {
+      label: "Índice de Ocupación"
+      value: "valor_ind_9"
+    }
+    allowed_value: {
+      label: "% Lecturas (Carga)"
+      value: "valor_ind_10"
+    }
+    allowed_value: {
+      label: "% Cierres de O.T."
+      value: "valor_ind_17"
+    }
+  }
+
   dimension: valor_indicador_dinamico {
     type: number
     sql:
@@ -493,6 +537,10 @@ view: test_mt_indicadores_medicion {
       WHEN {% parameter filtro_indicador %} = 'valor_ind_17' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
       ELSE NULL
     END ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/{{ filtro_indicador._parameter_value | url_encode }}?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
+    }
     value_format: "0.00"
   }
 
