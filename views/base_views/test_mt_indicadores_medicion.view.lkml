@@ -39,17 +39,24 @@ view: test_mt_indicadores_medicion {
     map_layer_name: provincias
   }
 
-  dimension: objetivo {
-    type: number
+  measure: objetivo {
+    type: average
     sql: ${TABLE}.objetivo ;;
-    map_layer_name: provincias
+    value_format: "0.00"
   }
 
-  dimension: valor {
-    type: number
+  measure: valor {
+    type: average
     sql: ${TABLE}.valor ;;
-    map_layer_name: provincias
+    value_format: "0.00"
   }
+
+  measure: diferencia {
+    type: number
+    sql: (AVG(${TABLE}.valor) - AVG(${TABLE}.objetivo)) / NULLIF(AVG(${TABLE}.objetivo), 0) ;;
+    value_format: "0.00%"
+  }
+
 
 
 
