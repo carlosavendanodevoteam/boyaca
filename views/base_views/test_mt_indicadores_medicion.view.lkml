@@ -511,6 +511,28 @@ view: test_mt_indicadores_medicion {
     value_format: "0.00"
   }
 
+  measure: media_valor_indicador_dinamico {
+    type: average
+    sql:
+    CASE
+      WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
+      ELSE NULL
+    END ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/{{ filtro_indicador._parameter_value | remove: \"'\" }}?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
+    }
+    value_format: "0.00"
+  }
+
 
   dimension: objetivo_indicador_dinamico {
     type: number
