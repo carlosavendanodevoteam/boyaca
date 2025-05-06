@@ -496,6 +496,24 @@ view: test_mt_indicadores_medicion {
     value_format: "0.00"
   }
 
+  dimension: objetivo_indicador_dinamico {
+    type: number
+    sql:
+    CASE
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_1' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_2' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_5' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_6' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_7' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_9' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_10' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_17' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.objetivo * 100
+      ELSE NULL
+    END ;;
+    value_format: "0.00"
+  }
+
 
 
 
