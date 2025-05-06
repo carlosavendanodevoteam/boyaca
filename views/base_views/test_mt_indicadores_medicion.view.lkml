@@ -478,57 +478,25 @@ view: test_mt_indicadores_medicion {
     }
   }
 
-  measure: indicador_dinamico {
-    type: average
-    sql:
-          {% if filtro_indicador._parameter_value == 'valor_ind_1' %} ${valor_ind_1}
-          {% elsif filtro_indicador._parameter_value == 'valor_ind_2' %} ${valor_ind_2}
-          {% elsif filtro_indicador._parameter_value == 'valor_ind_4' %} ${valor_ind_4}
-          {% elsif filtro_indicador._parameter_value == 'valor_ind_5' %} ${valor_ind_5}
-          {% elsif filtro_indicador._parameter_value == 'valor_ind_6' %} ${valor_ind_6}
-          {% elsif filtro_indicador._parameter_value == 'valor_ind_7' %} ${valor_ind_7}
-          {% elsif filtro_indicador._parameter_value == 'valor_ind_9' %} ${valor_ind_9}
-          {% elsif filtro_indicador._parameter_value == 'valor_ind_10' %} ${valor_ind_10}
-          {% elsif filtro_indicador._parameter_value == 'valor_ind_17' %} ${valor_ind_17}
-          {% else %} ${valor_ind_1}
-
-          {% endif %};;
-  }
-
-  measure: indicador_dinamico_2 {
-    type: average
+  dimension: valor_indicador_dinamico {
+    type: number
     sql:
     CASE
-      WHEN ${id_indicador} = 1 THEN ${valor_ind_1}
-      WHEN ${id_indicador} = 2 THEN ${valor_ind_2}
-      WHEN ${id_indicador} = 4 THEN ${valor_ind_4}
-      WHEN ${id_indicador} = 5 THEN ${valor_ind_5}
-      WHEN ${id_indicador} = 6 THEN ${valor_ind_6}
-      WHEN ${id_indicador} = 7 THEN ${valor_ind_7}
-      WHEN ${id_indicador} = 9 THEN ${valor_ind_9}
-      WHEN ${id_indicador} = 10 THEN ${valor_ind_10}
-      WHEN ${id_indicador} = 17 THEN ${valor_ind_17}
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_1' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_2' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_5' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_6' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_7' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_9' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_10' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = 'valor_ind_17' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
       ELSE NULL
     END ;;
     value_format: "0.00"
   }
 
-  dimension: id_indicador_2 {
-    type: number
-    sql:
 
-    CASE ${TABLE}.id_indicador
-      WHEN 1 THEN '€ Tonelada de Reparto y Recogida'
-      WHEN 2 THEN '€ Expedición'
-      WHEN 4 THEN '% Lecturas (Descarga)'
-      WHEN 5 THEN '% Confirmación Entrega'
-      WHEN 6 THEN '% Plazo y Ventana Horaria'
-      WHEN 7 THEN '€ Tonelada Arrastre'
-      WHEN 9 THEN 'Índice de Ocupación'
-      WHEN 10 THEN '% Lecturas (Carga)'
-      WHEN 17 THEN '% Cierres de O.T.'
-    END ;;
-  }
 
 
   }
