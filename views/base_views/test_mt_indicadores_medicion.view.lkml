@@ -623,6 +623,7 @@ view: test_mt_indicadores_medicion {
     value_format: "0.00"
   }
 
+
   dimension: nombre_indicador_dinamico {
     type: string
     sql:
@@ -640,6 +641,69 @@ view: test_mt_indicadores_medicion {
       ELSE NULL
     END ;;
   }
+
+  measure: diferencia_indicador_dinamico {
+    type: number
+    sql: (
+          CASE
+            WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN -1
+            WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN -1
+            WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN -1
+            ELSE 1
+          END
+        ) * (
+          (
+            AVG(
+              CASE
+                WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
+                WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
+                WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR * 100
+                WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
+                WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
+                WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
+                WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
+                WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.VALOR
+                WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR * 100
+                WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
+                ELSE NULL
+              END
+            ) -
+            AVG(
+              CASE
+                WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.objetivo
+                ELSE NULL
+              END
+            )
+          ) / NULLIF(
+            AVG(
+              CASE
+                WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.objetivo
+                ELSE NULL
+              END
+            ), 0
+          )
+        ) ;;
+    value_format: "0.00%"
+  }
+
 
 
 
