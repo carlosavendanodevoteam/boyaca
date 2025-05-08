@@ -564,7 +564,7 @@ view: test_mt_indicadores_medicion {
       WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
       WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
@@ -587,7 +587,7 @@ view: test_mt_indicadores_medicion {
       WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
       WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
@@ -658,7 +658,7 @@ view: test_mt_indicadores_medicion {
                 WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR
-                WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
+                WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
                 WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
