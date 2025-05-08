@@ -549,9 +549,24 @@ view: test_mt_indicadores_medicion {
       value: "7"
     }
     allowed_value: {
+      label: "% Pesaje y Volumetria"
+      # value: "valor_ind_13"
+      value: "12"
+    }
+    allowed_value: {
+      label: "% Salida en hora LD"
+      # value: "valor_ind_13"
+      value: "13"
+    }
+    allowed_value: {
       label: "% Cierres de O.T."
       # value: "valor_ind_17"
       value: "13"
+    }
+    allowed_value: {
+      label: "% Digitalización PODs"
+      # value: "valor_ind_13"
+      value: "15"
     }
   }
 
