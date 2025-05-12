@@ -26,12 +26,10 @@ persist_with: tam_looker_default_datagroup
 # Each joined view also needs to define a primary key.
 
 explore: gs_indicadores_medicion {}
-
 explore: mt_indicadores_medicion {}
-
 explore: t_regiones_agencias {}
-
 explore: test_mt_indicadores_medicion {}
+explore: calidad {}
 
 explore: derived_ind_1 {}
 explore: derived_ind_2 {}
