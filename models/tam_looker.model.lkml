@@ -44,6 +44,7 @@ explore: derived_ind_9 {}
 explore: derived_ind_10 {}
 explore: derived_ind_12 {}
 explore: derived_ind_13 {}
+explore: derived_ind_15 {}
 explore: derived_ind_17 {}
 
 map_layer: provincias {
