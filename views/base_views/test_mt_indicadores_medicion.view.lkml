@@ -457,6 +457,50 @@ view: test_mt_indicadores_medicion {
     value_format: "\"%\"0.00"
   }
 
+
+# --------------------------------------
+# Indicador 12: % Pesaje y Volumetria
+# --------------------------------------
+  dimension: objetivo_ind_12 {
+    type: number
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/18?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  measure: objetivo_avg_ind_12 {
+    type: average
+    sql: ${TABLE}.objetivo ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/18?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  dimension: valor_ind_12 {
+    type: number
+    sql: ${TABLE}.VALOR * 100;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/18?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
+    }
+    value_format: "\"%\"0.00"
+  }
+
+  measure: valor_avg_ind_12 {
+    type: average
+    sql: ${TABLE}.VALOR * 100 ;;
+    link: {
+      label: "Detalle"
+      url: "/dashboards/18?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
+    }
+    value_format: "\"%\"0.00"
+  }
+
 # --------------------------------------
 # Indicador 17: % Cierres de O.T.
 # --------------------------------------
@@ -551,7 +595,7 @@ view: test_mt_indicadores_medicion {
     allowed_value: {
       label: "% Pesaje y Volumetria"
       # value: "valor_ind_12"
-      value: "12"
+      value: "18"
     }
     allowed_value: {
       label: "% Salida en hora LD"
@@ -586,6 +630,7 @@ view: test_mt_indicadores_medicion {
       WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '18' AND ${TABLE}.id_indicador = 12 THEN ${TABLE}.VALOR * 100
       WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
       ELSE NULL
     END ;;
@@ -609,6 +654,7 @@ view: test_mt_indicadores_medicion {
       WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '18' AND ${TABLE}.id_indicador = 12 THEN ${TABLE}.VALOR * 100
       WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
       ELSE NULL
     END ;;
@@ -633,6 +679,7 @@ view: test_mt_indicadores_medicion {
       WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.objetivo
+      WHEN {% parameter filtro_indicador %} = '18' AND ${TABLE}.id_indicador = 12 THEN ${TABLE}.objetivo
       WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.objetivo
       ELSE NULL
     END ;;
@@ -653,6 +700,7 @@ view: test_mt_indicadores_medicion {
       WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN "€ Tonelada Arrastre"
       WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN "Índice de Ocupación"
       WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN "% Lecturas (Carga)"
+      WHEN {% parameter filtro_indicador %} = '18' AND ${TABLE}.id_indicador = 12 THEN "% Pesaje y Volumetria"
       WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN "% Cierres de O.T."
       ELSE NULL
     END ;;
@@ -680,6 +728,7 @@ view: test_mt_indicadores_medicion {
                 WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR * 100
+                WHEN {% parameter filtro_indicador %} = '18' AND ${TABLE}.id_indicador = 12 THEN ${TABLE}.VALOR * 100
                 WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
                 ELSE NULL
               END
@@ -695,6 +744,7 @@ view: test_mt_indicadores_medicion {
                 WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.objetivo
                 WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.objetivo
                 WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '18' AND ${TABLE}.id_indicador = 12 THEN ${TABLE}.objetivo
                 WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.objetivo
                 ELSE NULL
               END
@@ -711,6 +761,7 @@ view: test_mt_indicadores_medicion {
                 WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.objetivo
                 WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.objetivo
                 WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.objetivo
+                WHEN {% parameter filtro_indicador %} = '18' AND ${TABLE}.id_indicador = 12 THEN ${TABLE}.objetivo
                 WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.objetivo
                 ELSE NULL
               END
