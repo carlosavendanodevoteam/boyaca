@@ -210,4 +210,194 @@ view: calidad {
     type: count
   }
 
+
+  parameter: dimension_principal {
+    default_value: "clie_cent_codigo_nom_ori"
+    allowed_value: {
+      label: "Agencia Pagadora"
+      value: "dele_codigo_pag"
+    }
+    allowed_value: {
+      label: "Agencia Destino"
+      value: "dele_codigo_des"
+    }
+    allowed_value: {
+      label: "Cliente Origen"
+      value: "clie_cent_codigo_nom_ori"
+    }
+    allowed_value: {
+      label: "NAF"
+      value: "tipa_descripcion"
+    }
+    allowed_value: {
+      label: "Producto"
+      value: "prse_descripcion"
+    }
+    allowed_value: {
+      label: "Estado Expedición"
+      value: "cr_estado"
+    }
+  }
+
+  parameter: tipo_medida {
+    default_value: "conteo"
+    allowed_value: {
+      label: "% Porcentaje"
+      value: "porcentaje"
+    }
+    allowed_value: {
+      label: "Conteo"
+      value: "conteo"
+    }
+  }
+
+  # dimension: dinamica_dimension_principal {
+  #   type: string
+  #   sql:
+  #   CASE
+  #     WHEN {% parameter dimension_principal %} = "dele_codigo_pag" THEN ${dele_codigo_pag}
+  #     WHEN {% parameter dimension_principal %} = "dele_codigo_des" THEN ${dele_codigo_des}
+  #     WHEN {% parameter dimension_principal %} = "clie_cent_codigo_nom_ori" THEN ${clie_cent_codigo_nom_ori}
+  #     WHEN {% parameter dimension_principal %} = "tipa_descripcion" THEN ${tipa_descripcion}
+  #     WHEN {% parameter dimension_principal %} = "prse_descripcion" THEN ${prse_descripcion}
+  #     WHEN {% parameter dimension_principal %} = "cr_estado" THEN ${cr_estado}
+  #   END ;;
+  # }
+  dimension: dinamica_dimension_principal {
+    type: string
+    sql:
+          {% if dimension_principal._parameter_value == "dele_codigo_pag" %}
+            ${dele_codigo_pag}
+          {% elsif dimension_principal._parameter_value == "dele_codigo_des" %}
+            ${dele_codigo_des}
+          {% elsif dimension_principal._parameter_value == "clie_cent_codigo_nom_ori" %}
+            ${clie_cent_codigo_nom_ori}
+          {% elsif dimension_principal._parameter_value == "tipa_descripcion" %}
+            ${tipa_descripcion}
+          {% elsif dimension_principal._parameter_value == "prse_descripcion" %}
+            ${prse_descripcion}
+          {% elsif dimension_principal._parameter_value == "cr_estado" %}
+            ${cr_estado}
+          {% else %}
+            ${clie_cent_codigo_nom_ori}
+          {% endif %}
+        ;;
+  }
+
+
+  measure: dinamica_t_mas_1 {
+    type: number
+    sql:
+    {% if tipo_medida._parameter_value == 'conteo' %}
+      ${t_mas_1}
+    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
+      ${porc_t_mas_1}
+    {% endif %};;
+  }
+
+  measure: dinamica_mayor_t_mas_1 {
+    type: number
+    sql:
+    {% if tipo_medida._parameter_value == 'conteo' %}
+      ${mayor_t_mas_1}
+    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
+      ${porc_mayor_t_mas_1}
+    {% endif %};;
+  }
+
+  measure: dinamica_pendiente {
+    type: number
+    sql:
+    {% if tipo_medida._parameter_value == 'conteo' %}
+      ${pendiente}
+    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
+      ${porc_pendiente}
+    {% endif %};;
+  }
+
+  measure: dinamica_otras_pendiente {
+    type: number
+    sql:
+    {% if tipo_medida._parameter_value == 'conteo' %}
+      ${otras_pendiente}
+    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
+      ${porc_otras_pendiente}
+    {% endif %};;
+  }
+
+  measure: dinamica_antes {
+    type: number
+    sql:
+    {% if tipo_medida._parameter_value == 'conteo' %}
+      ${antes}
+    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
+      ${porc_antes}
+    {% endif %};;
+  }
+
+  measure: dinamica_obj {
+    type: number
+    sql:
+    {% if tipo_medida._parameter_value == 'conteo' %}
+      ${obj}
+    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
+      ${porc_obj}
+    {% endif %};;
+  }
+
+  measure: dinamica_acum_obj {
+    type: number
+    sql:
+    {% if tipo_medida._parameter_value == 'conteo' %}
+      ${acum_obj}
+    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
+      ${porc_acum_obj}
+    {% endif %};;
+  }
+
+  measure: dinamica_delay {
+    type: number
+    sql:
+    {% if tipo_medida._parameter_value == 'conteo' %}
+      ${delay}
+    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
+      ${porc_delay}
+    {% endif %};;
+  }
+
+
+  # html:
+
+  # {% if filtro_medida_dinamica._parameter_value == 'margen_bruto_unitario' and filtro_dimension_dinamica._parameter_value == 'Item' %}
+
+  # €{{rendered_value}}
+
+  # {% elsif filtro_medida_dinamica._parameter_value == 'margen_bruto_unitario' and filtro_dimension_dinamica._parameter_value == 'Agregado' %}
+
+  # €{{rendered_value}}
+  # {% elsif filtro_medida_dinamica._parameter_value == 'margen_bruto_pct' and filtro_dimension_dinamica._parameter_value == 'Item' %}
+
+  # {{rendered_value}}%
+  # {% elsif filtro_medida_dinamica._parameter_value == 'margen_bruto_pct' and filtro_dimension_dinamica._parameter_value == 'Agregado' %}
+
+  # {{rendered_value}}%
+
+  # {% elsif filtro_medida_dinamica._parameter_value == 'margen_bruto_eur'  and filtro_dimension_dinamica._parameter_value == 'Agregado' %}
+
+  # €{{rendered_value}}
+
+  # {% elsif filtro_medida_dinamica._parameter_value == 'margen_bruto_eur'  and filtro_dimension_dinamica._parameter_value == 'Item' %}
+
+  # €{{rendered_value}}
+
+  # {% else %}
+
+  # €{{rendered_value}}
+
+  # {% endif %}
+
+  # ;;
+  # value_format: "#,##0.00"
+
+
 }
