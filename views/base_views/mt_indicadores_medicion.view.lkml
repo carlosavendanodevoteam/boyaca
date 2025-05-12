@@ -50,4 +50,62 @@ view: mt_indicadores_medicion {
   measure: count {
     type: count
   }
+
+  parameter: filtro_indicador {
+    label: "Elige indicador"
+    type: string
+    allowed_value: {
+      label: "€ Tonelada de Reparto y Recogida"
+      value: "1"
+    }
+    allowed_value: {
+      label: "€ Expedición"
+      value: "2"
+    }
+    allowed_value: {
+      label: "% de Enrutamiento"
+      value: "3"
+    }
+    allowed_value: {
+      label: "% Lecturas (Descarga)"
+      value: "4"
+    }
+    allowed_value: {
+      label: "% Confirmación Entrega"
+      value: "5"
+    }
+    allowed_value: {
+      label: "% Plazo y Ventana Horaria"
+      value: "6"
+    }
+    allowed_value: {
+      label: "€ Tonelada Arrastre"
+      value: "7"
+    }
+    allowed_value: {
+      label: "Índice de Ocupación"
+      value: "9"
+    }
+    allowed_value: {
+      label: "% Lecturas (Carga)"
+      value: "10"
+    }
+    allowed_value: {
+      label: "% Pesaje y Volumetria"
+      value: "12"
+    }
+    allowed_value: {
+      label: "% Salida en hora LD"
+      value: "13"
+    }
+    allowed_value: {
+      label: "% Digitalización PODs"
+      value: "15"
+    }
+    allowed_value: {
+      label: "% Cierres de O.T."
+      value: "17"
+    }
+
+  }
 }
