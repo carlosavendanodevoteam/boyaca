@@ -550,7 +550,7 @@ view: test_mt_indicadores_medicion {
     }
     allowed_value: {
       label: "% Pesaje y Volumetria"
-      # value: "valor_ind_13"
+      # value: "valor_ind_12"
       value: "12"
     }
     allowed_value: {
@@ -559,15 +559,16 @@ view: test_mt_indicadores_medicion {
       value: "13"
     }
     allowed_value: {
+      label: "% Digitalización PODs"
+      # value: "valor_ind_15"
+      value: "15"
+    }
+    allowed_value: {
       label: "% Cierres de O.T."
       # value: "valor_ind_17"
       value: "13"
     }
-    allowed_value: {
-      label: "% Digitalización PODs"
-      # value: "valor_ind_13"
-      value: "15"
-    }
+
   }
 
 
@@ -719,6 +720,25 @@ view: test_mt_indicadores_medicion {
     value_format: "0.00%"
   }
 
+  measure: pop_indicador_ano_pasado {
+    type: period_over_period
+    description: "Indicador año pasado"
+    based_on: valor_medio
+    based_on_time: fecha_filtro_year
+    period: year
+    kind: previous
+    value_format: "0.00"
+  }
+
+  measure: pop_indicador_mes_pasado {
+    type: period_over_period
+    description: "Indicador mes pasado"
+    based_on: valor_medio
+    based_on_time: fecha_filtro_year
+    period: month
+    kind: previous
+    value_format: "0.00"
+  }
 
 
 
