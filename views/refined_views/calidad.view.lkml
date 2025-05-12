@@ -241,6 +241,7 @@ view: calidad {
 
   parameter: tipo_medida {
     default_value: "conteo"
+
     allowed_value: {
       label: "% Porcentaje"
       value: "porcentaje"
@@ -263,20 +264,48 @@ view: calidad {
   #     WHEN {% parameter dimension_principal %} = "cr_estado" THEN ${cr_estado}
   #   END ;;
   # }
+  # parameter: elegir_agrupacion {
+  #   label: "2. Elegir Agrupación (Filas)"
+  #   view_label: "_PoP"
+  #   type: unquoted
+  #   default_value: "Month"
+  #   allowed_value: {label: "Nombre del Mes" value:"Month"}
+  #   allowed_value: {label: "Día del Año" value: "DOY"}
+  #   allowed_value: {label: "Día del Mes" value: "DOM"}
+  #   allowed_value: {label: "Día de la Semana" value: "DOW"}
+  #   allowed_value: {label: "Semana" value: "Week"}
+  #   allowed_value: {value: "Date"}
+  # }
+
+
+  # dimension: pop_fila  {
+  #   view_label: "_PoP"
+  #   label_from_parameter: elegir_agrupacion
+  #   type: string
+  #   order_by_field: sort_by1
+  #   sql:
+  #     {% if elegir_agrupacion._parameter_value == 'Month' %} ${fecha_filtro_month_name}
+  #     {% elsif elegir_agrupacion._parameter_value == 'DOY' %} ${fecha_filtro_day_of_year}
+  #     {% elsif elegir_agrupacion._parameter_value == 'DOM' %} ${fecha_filtro_day_of_month}
+  #     {% elsif elegir_agrupacion._parameter_value == 'DOW' %} ${fecha_filtro_day_of_week}
+  #     {% elsif elegir_agrupacion._parameter_value == 'Date' %} ${fecha_filtro_date}
+  #     {% elsif elegir_agrupacion._parameter_value == 'Week' %} ${fecha_filtro_week}
+  #     {% else %}NULL{% endif %} ;;
+  # }
   dimension: dinamica_dimension_principal {
     type: string
     sql:
-          {% if dimension_principal._parameter_value == "dele_codigo_pag" %}
+          {% if dimension_principal._parameter_value == 'dele_codigo_pag' %}
             ${dele_codigo_pag}
-          {% elsif dimension_principal._parameter_value == "dele_codigo_des" %}
+          {% elsif dimension_principal._parameter_value == 'dele_codigo_des' %}
             ${dele_codigo_des}
-          {% elsif dimension_principal._parameter_value == "clie_cent_codigo_nom_ori" %}
+          {% elsif dimension_principal._parameter_value == 'clie_cent_codigo_nom_ori' %}
             ${clie_cent_codigo_nom_ori}
-          {% elsif dimension_principal._parameter_value == "tipa_descripcion" %}
+          {% elsif dimension_principal._parameter_value == 'tipa_descripcion' %}
             ${tipa_descripcion}
-          {% elsif dimension_principal._parameter_value == "prse_descripcion" %}
+          {% elsif dimension_principal._parameter_value == 'prse_descripcion' %}
             ${prse_descripcion}
-          {% elsif dimension_principal._parameter_value == "cr_estado" %}
+          {% elsif dimension_principal._parameter_value == 'cr_estado' %}
             ${cr_estado}
           {% else %}
             ${clie_cent_codigo_nom_ori}
