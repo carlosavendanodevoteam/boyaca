@@ -41,6 +41,17 @@ view: mt_indicadores_medicion {
     sql: ${TABLE}.VALOR ;;
     value_format: "0.##"
   }
+
+  measure: valor_medio {
+    type: average
+    sql: ${valor} ;;
+  }
+
+  measure: objetivo_medio {
+    type: average
+    sql: ${objetivo} ;;
+  }
+
   measure: count {
     type: count
   }
