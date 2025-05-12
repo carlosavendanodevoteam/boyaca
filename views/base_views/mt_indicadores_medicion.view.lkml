@@ -47,11 +47,6 @@ view: mt_indicadores_medicion {
     sql: ${valor} ;;
   }
 
-  measure: objetivo_medio {
-    type: average
-    sql: ${objetivo} ;;
-  }
-
   measure: count {
     type: count
   }
