@@ -722,6 +722,7 @@ view: test_mt_indicadores_medicion {
 
   measure: pop_indicador_ano_pasado {
     type: period_over_period
+    label: "Pop indicador año pasado"
     description: "Indicador año pasado"
     based_on: valor_medio
     based_on_time: fecha_filtro_year
