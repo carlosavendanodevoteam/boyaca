@@ -8,7 +8,7 @@ view: test_mt_indicadores_medicion {
 
   dimension_group: fecha_filtro {
     type: time
-    timeframes: [raw, date, week, month, quarter, year]
+    timeframes: [time, date, week, month, year,day_of_week, day_of_month, day_of_year, day_of_week_index, month_name, month_num]
     convert_tz: no
     datatype: date
     sql: ${TABLE}.FECHA_FILTRO ;;
@@ -633,6 +633,11 @@ view: test_mt_indicadores_medicion {
     value_format: "\"%\"0.00"
   }
 
+
+# ------------------------------------
+# parametro dinamico para indicadores
+# ------------------------------------
+
   parameter: filtro_indicador {
     label: "Elige indicador"
     type: string
@@ -874,6 +879,10 @@ view: test_mt_indicadores_medicion {
     value_format: "0.00%"
   }
 
+
+# ------------------
+# pop nativo looker
+# ------------------
   measure: pop_indicador_ano_pasado {
     type: period_over_period
     label: "Pop indicador año pasado"
@@ -895,6 +904,81 @@ view: test_mt_indicadores_medicion {
     value_format: "0.00"
   }
 
+# ------
+# pop 1
+# ------
+  parameter: elegir_agrupacion {
+    label: "2. Elegir Agrupación (Filas)"
+    view_label: "_PoP"
+    type: unquoted
+    default_value: "Month"
+    allowed_value: {label: "Nombre del Mes" value:"Month"}
+    allowed_value: {label: "Día del Año" value: "DOY"}
+    allowed_value: {label: "Día del Mes" value: "DOM"}
+    allowed_value: {label: "Día de la Semana" value: "DOW"}
+    allowed_value: {label: "Semana" value: "Week"}
+    allowed_value: {value: "Date"}
+  }
+
+  parameter: elegir_comparacion {
+    label: "1. Elegir Comparación (Pivote)"
+    view_label: "_PoP"
+    type: unquoted
+    default_value: "Year"
+    allowed_value: {value: "Ano" label: "Año"}
+    allowed_value: {value: "Mes"}
+    allowed_value: {value: "Semana"}
+  }
+
+
+  dimension: pop_fila  {
+    view_label: "_PoP"
+    label_from_parameter: elegir_agrupacion
+    type: string
+    order_by_field: sort_by1
+    sql:
+      {% if elegir_agrupacion._parameter_value == 'Month' %} ${fecha_filtro_month_name}
+      {% elsif elegir_agrupacion._parameter_value == 'DOY' %} ${fecha_filtro_day_of_year}
+      {% elsif elegir_agrupacion._parameter_value == 'DOM' %} ${fecha_filtro_day_of_month}
+      {% elsif elegir_agrupacion._parameter_value == 'DOW' %} ${fecha_filtro_day_of_week}
+      {% elsif elegir_agrupacion._parameter_value == 'Date' %} ${fecha_filtro_date}
+      {% elsif elegir_agrupacion._parameter_value == 'Week' %} ${fecha_filtro_week}
+      {% else %}NULL{% endif %} ;;
+  }
+
+  dimension: pop_pivote {
+    view_label: "_PoP"
+    label_from_parameter: elegir_comparacion
+    type: string
+    order_by_field: sort_by2
+    sql:
+      {% if elegir_comparacion._parameter_value == 'Ano' %} ${fecha_filtro_year}
+      {% elsif elegir_comparacion._parameter_value == 'Mes' %} ${fecha_filtro_month_name}
+      {% elsif elegir_comparacion._parameter_value == 'Semana' %} ${fecha_filtro_week}
+      {% else %}NULL{% endif %} ;;
+  }
+
+  dimension: sort_by1 {
+    hidden: yes
+    type: number
+    sql:
+      {% if elegir_agrupacion._parameter_value == 'Month' %} ${fecha_filtro_month_num}
+      {% elsif elegir_agrupacion._parameter_value == 'DOY' %} ${fecha_filtro_day_of_year}
+      {% elsif elegir_agrupacion._parameter_value == 'DOM' %} ${fecha_filtro_day_of_month}
+      {% elsif elegir_agrupacion._parameter_value == 'DOW' %} ${fecha_filtro_day_of_week_index}
+      {% elsif elegir_agrupacion._parameter_value == 'Date' %} ${fecha_filtro_date}
+      {% else %}NULL{% endif %} ;;
+  }
+
+  dimension: sort_by2 {
+    hidden: yes
+    type: string
+    sql:
+      {% if elegir_comparacion._parameter_value == 'Ano' %} ${fecha_filtro_year}
+      {% elsif elegir_comparacion._parameter_value == 'Mes' %} ${fecha_filtro_month_num}
+      {% elsif elegir_comparacion._parameter_value == 'Semana' %} ${fecha_filtro_week}
+      {% else %}NULL{% endif %} ;;
+  }
 
 
   }
