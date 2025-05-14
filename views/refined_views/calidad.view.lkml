@@ -93,6 +93,7 @@ view: calidad {
 
   measure: PRKgs {
     type: sum
+    value_format: "0.00"
     sql: ${expe_peso_expedicion} ;;
   }
 
@@ -111,6 +112,7 @@ view: calidad {
   measure: obj {
     type: count_distinct
     sql: IF(${expe_en_fecha_objetivo_c} = 1, ${expe_numero}, NULL);;
+    value_format: "0.00"
   }
 
   measure: porc_obj {
@@ -123,13 +125,14 @@ view: calidad {
   measure: acum_obj {
     type: count_distinct
     sql: IF(${expe_antes_fecha_objetivo_c} = 1 OR ${expe_en_fecha_objetivo_c} = 1, ${expe_numero}, NULL);;
+    # value_format: "0.00"
   }
 
   measure: porc_acum_obj {
     type: number
     label: "% Acum Obj"
     sql: (COUNT(DISTINCT(IF(${expe_antes_fecha_objetivo_c} = 1 OR ${expe_en_fecha_objetivo_c} = 1, ${expe_numero}, NULL)))/COUNT(DISTINCT(${expe_numero}))) * 100;;
-    value_format: "0.00%"
+    # value_format: "0.00%"
   }
 
   measure: delay {
@@ -210,9 +213,60 @@ view: calidad {
     type: count
   }
 
+  measure: sum_expe_sin_fecha_objetivo {
+    type: sum
+    sql: ${expe_sin_fecha_objetivo};;
+  }
 
-  parameter: dimension_principal {
-    default_value: "clie_cent_codigo_nom_ori"
+  measure: sum_expe_pendiente {
+    type: sum
+    sql: ${expe_pendiente};;
+  }
+
+  measure: sum_expe_sin_exfe_fecha_c {
+    type: sum
+    sql: ${expe_sin_exfe_fecha_c};;
+  }
+
+  measure: sum_expe_en_periodo_c {
+    type: sum
+    sql: ${expe_en_periodo_c};;
+  }
+
+  measure: sum_expe_antes_fecha_objetivo_c {
+    type: sum
+    sql: ${expe_antes_fecha_objetivo_c};;
+  }
+
+  measure: sum_expe_en_fecha_objetivo_c {
+    type: sum
+    sql: ${expe_en_fecha_objetivo_c};;
+  }
+
+  measure: sum_expe_fuera_de_hora_c {
+    type: sum
+    sql: ${expe_fuera_de_hora_c};;
+  }
+
+  measure: sum_expe_1_dia_retraso_c {
+    type: sum
+    sql: ${expe_1_dia_retraso_c};;
+  }
+
+  measure: sum_expe_mas_1_dia_retraso_c {
+    type: sum
+    sql: ${expe_mas_1_dia_retraso_c};;
+  }
+
+  measure: sum_expe_no_clasificable_c {
+    type: sum
+    sql: ${expe_no_clasificable_c};;
+  }
+
+
+
+  parameter: param_agencia_cliente {
+    default_value: "dele_codigo_pag"
     allowed_value: {
       label: "Agencia Pagadora"
       value: "dele_codigo_pag"
@@ -223,19 +277,11 @@ view: calidad {
     }
     allowed_value: {
       label: "Cliente Origen"
-      value: "clie_cent_codigo_nom_ori"
+      value: "clie_codigo_ori_nom"
     }
     allowed_value: {
-      label: "NAF"
-      value: "tipa_descripcion"
-    }
-    allowed_value: {
-      label: "Producto"
-      value: "prse_descripcion"
-    }
-    allowed_value: {
-      label: "Estado Expedición"
-      value: "cr_estado"
+      label: "Cliente Destino"
+      value: "clie_codigo_des_nom"
     }
   }
 
@@ -292,23 +338,20 @@ view: calidad {
   #     {% elsif elegir_agrupacion._parameter_value == 'Week' %} ${fecha_filtro_week}
   #     {% else %}NULL{% endif %} ;;
   # }
-  dimension: dinamica_dimension_principal {
+  dimension: dinamica_agencia_cliente {
     type: string
+    label: "Agencia/Cliente"
     sql:
-          {% if dimension_principal._parameter_value == 'dele_codigo_pag' %}
+          {% if param_agencia_cliente._parameter_value contains 'dele_codigo_pag' %}
             ${dele_codigo_pag}
-          {% elsif dimension_principal._parameter_value == 'dele_codigo_des' %}
+          {% elsif param_agencia_cliente._parameter_value contains 'dele_codigo_des' %}
             ${dele_codigo_des}
-          {% elsif dimension_principal._parameter_value == 'clie_cent_codigo_nom_ori' %}
-            ${clie_cent_codigo_nom_ori}
-          {% elsif dimension_principal._parameter_value == 'tipa_descripcion' %}
-            ${tipa_descripcion}
-          {% elsif dimension_principal._parameter_value == 'prse_descripcion' %}
-            ${prse_descripcion}
-          {% elsif dimension_principal._parameter_value == 'cr_estado' %}
-            ${cr_estado}
+          {% elsif param_agencia_cliente._parameter_value contains 'clie_codigo_ori_nom' %}
+            ${clie_codigo_ori_nom}
+          {% elsif param_agencia_cliente._parameter_value contains 'clie_codigo_des_nom' %}
+            ${clie_codigo_des_nom}
           {% else %}
-            ${clie_cent_codigo_nom_ori}
+            ${dele_codigo_pag}
           {% endif %}
         ;;
   }
@@ -316,117 +359,151 @@ view: calidad {
 
   measure: dinamica_t_mas_1 {
     type: number
+    label: "T + 1"
+    value_format: "0.00"
     sql:
-    {% if tipo_medida._parameter_value == 'conteo' %}
-      ${t_mas_1}
-    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
-      ${porc_t_mas_1}
-    {% endif %};;
+    CASE
+      WHEN {% parameter tipo_medida %} = 'conteo' THEN ${t_mas_1}
+      WHEN {% parameter tipo_medida %} = 'porcentaje' THEN ${porc_t_mas_1}
+    END ;;
+    html:
+    {% if tipo_medida._parameter_value contains 'porcentaje' %}
+    {{rendered_value}}%
+    {% else %}
+    {{rendered_value}}
+    {% endif %}
+    ;;
   }
 
   measure: dinamica_mayor_t_mas_1 {
     type: number
+    label: "> T + 1"
+    value_format: "0.00"
     sql:
-    {% if tipo_medida._parameter_value == 'conteo' %}
-      ${mayor_t_mas_1}
-    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
-      ${porc_mayor_t_mas_1}
-    {% endif %};;
+    CASE
+      WHEN {% parameter tipo_medida %} = 'conteo' THEN ${mayor_t_mas_1}
+      WHEN {% parameter tipo_medida %} = 'porcentaje' THEN ${porc_mayor_t_mas_1}
+    END ;;
+    html:
+    {% if tipo_medida._parameter_value contains 'porcentaje' %}
+    {{rendered_value}}%
+    {% else %}
+    {{rendered_value}}
+    {% endif %}
+    ;;
   }
 
   measure: dinamica_pendiente {
     type: number
+    label: "Pendiente"
+    value_format: "0.00"
     sql:
-    {% if tipo_medida._parameter_value == 'conteo' %}
-      ${pendiente}
-    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
-      ${porc_pendiente}
-    {% endif %};;
+    CASE
+      WHEN {% parameter tipo_medida %} = 'conteo' THEN ${pendiente}
+      WHEN {% parameter tipo_medida %} = 'porcentaje' THEN ${porc_pendiente}
+    END ;;
+    html:
+    {% if tipo_medida._parameter_value contains 'porcentaje' %}
+    {{rendered_value}}%
+    {% else %}
+    {{rendered_value}}
+    {% endif %}
+    ;;
   }
 
   measure: dinamica_otras_pendiente {
     type: number
+    label: "Otras Pdte."
+    value_format: "0.00"
     sql:
-    {% if tipo_medida._parameter_value == 'conteo' %}
-      ${otras_pendiente}
-    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
-      ${porc_otras_pendiente}
-    {% endif %};;
+    CASE
+      WHEN {% parameter tipo_medida %} = 'conteo' THEN ${otras_pendiente}
+      WHEN {% parameter tipo_medida %} = 'porcentaje' THEN ${porc_otras_pendiente}
+    END ;;
+    html:
+    {% if tipo_medida._parameter_value contains 'porcentaje' %}
+    {{rendered_value}}%
+    {% else %}
+    {{rendered_value}}
+    {% endif %}
+    ;;
   }
 
   measure: dinamica_antes {
     type: number
+    label: "Antes"
+    value_format: "0.00"
     sql:
-    {% if tipo_medida._parameter_value == 'conteo' %}
-      ${antes}
-    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
-      ${porc_antes}
-    {% endif %};;
+    CASE
+      WHEN {% parameter tipo_medida %} = 'conteo' THEN ${antes}
+      WHEN {% parameter tipo_medida %} = 'porcentaje' THEN ${porc_antes}
+    END ;;
+    html:
+    {% if tipo_medida._parameter_value contains 'porcentaje' %}
+    {{rendered_value}}%
+    {% else %}
+    {{rendered_value}}
+    {% endif %}
+    ;;
   }
 
   measure: dinamica_obj {
     type: number
+    label: "Obj"
+    value_format: "0.00"
     sql:
-    {% if tipo_medida._parameter_value == 'conteo' %}
-      ${obj}
-    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
-      ${porc_obj}
-    {% endif %};;
+    CASE
+      WHEN {% parameter tipo_medida %} = 'conteo' THEN ${obj}
+      WHEN {% parameter tipo_medida %} = 'porcentaje' THEN ${porc_obj}
+    END ;;
+    html:
+    {% if tipo_medida._parameter_value contains 'porcentaje' %}
+    {{rendered_value}}%
+    {% else %}
+    {{rendered_value}}
+    {% endif %}
+    ;;
   }
 
   measure: dinamica_acum_obj {
     type: number
+    label: "Acum. Obj"
+    value_format: "0.00"
     sql:
-    {% if tipo_medida._parameter_value == 'conteo' %}
-      ${acum_obj}
-    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
-      ${porc_acum_obj}
-    {% endif %};;
+    CASE
+      WHEN {% parameter tipo_medida %} = 'conteo' THEN ${acum_obj}
+      WHEN {% parameter tipo_medida %} = 'porcentaje' THEN ${porc_acum_obj}
+    END ;;
+    html:
+    {% if tipo_medida._parameter_value contains 'porcentaje' %}
+    {{rendered_value}}%
+    {% else %}
+    {{rendered_value}}
+    {% endif %}
+    ;;
   }
 
   measure: dinamica_delay {
     type: number
+    label: "Delay"
+    value_format: "0.00"
     sql:
-    {% if tipo_medida._parameter_value == 'conteo' %}
-      ${delay}
-    {% elsif tipo_medida._parameter_value == 'porcentaje' %}
-      ${porc_delay}
-    {% endif %};;
+    CASE
+      WHEN {% parameter tipo_medida %} = 'conteo' THEN ${delay}
+      WHEN {% parameter tipo_medida %} = 'porcentaje' THEN ${porc_delay}
+    END ;;
+    html:
+    {% if tipo_medida._parameter_value contains 'porcentaje' %}
+    {{rendered_value}}%
+    {% else %}
+    {{rendered_value}}
+    {% endif %}
+    ;;
   }
 
 
-  # html:
 
-  # {% if filtro_medida_dinamica._parameter_value == 'margen_bruto_unitario' and filtro_dimension_dinamica._parameter_value == 'Item' %}
 
-  # €{{rendered_value}}
-
-  # {% elsif filtro_medida_dinamica._parameter_value == 'margen_bruto_unitario' and filtro_dimension_dinamica._parameter_value == 'Agregado' %}
-
-  # €{{rendered_value}}
-  # {% elsif filtro_medida_dinamica._parameter_value == 'margen_bruto_pct' and filtro_dimension_dinamica._parameter_value == 'Item' %}
-
-  # {{rendered_value}}%
-  # {% elsif filtro_medida_dinamica._parameter_value == 'margen_bruto_pct' and filtro_dimension_dinamica._parameter_value == 'Agregado' %}
-
-  # {{rendered_value}}%
-
-  # {% elsif filtro_medida_dinamica._parameter_value == 'margen_bruto_eur'  and filtro_dimension_dinamica._parameter_value == 'Agregado' %}
-
-  # €{{rendered_value}}
-
-  # {% elsif filtro_medida_dinamica._parameter_value == 'margen_bruto_eur'  and filtro_dimension_dinamica._parameter_value == 'Item' %}
-
-  # €{{rendered_value}}
-
-  # {% else %}
-
-  # €{{rendered_value}}
-
-  # {% endif %}
-
-  # ;;
-  # value_format: "#,##0.00"
 
 
 }
