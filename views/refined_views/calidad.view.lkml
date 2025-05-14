@@ -298,6 +298,46 @@ view: calidad {
     }
   }
 
+  parameter: param_destino {
+    default_value: "dele_nombre_des"
+    allowed_value: {
+      label: "Región"
+      value: "region"
+    }
+    allowed_value: {
+      label: "Provincia"
+      value: "dele_nombre_des"
+    }
+    allowed_value: {
+      label: "Zona"
+      value: "zona"
+    }
+    allowed_value: {
+      label: "Población"
+      value: "expe_poblacion_destino"
+    }
+    allowed_value: {
+      label: "Fecha Recogida"
+      value: "fecha_recogida_date"
+    }
+    allowed_value: {
+      label: "Fecha Llegada"
+      value: "fecha_llegada_date"
+    }
+    allowed_value: {
+      label: "Fecha Última Entrega"
+      value: "cr_fecha_ultima_entrega_date"
+    }
+    allowed_value: {
+      label: "Estado"
+      value: "cr_estado"
+    }
+    allowed_value: {
+      label: "NAF"
+      value: "tipa_descripcion"
+    }
+  }
+
   # dimension: dinamica_dimension_principal {
   #   type: string
   #   sql:
@@ -338,9 +378,37 @@ view: calidad {
   #     {% elsif elegir_agrupacion._parameter_value == 'Week' %} ${fecha_filtro_week}
   #     {% else %}NULL{% endif %} ;;
   # }
+
+  dimension: dinamica_destino {
+    type: string
+    sql:
+    {% if param_destino._parameter_value contains 'region' %}
+      ${region}
+    {% elsif param_destino._parameter_value contains 'dele_nombre_des' %}
+      ${dele_nombre_des}
+    {% elsif param_destino._parameter_value contains 'zona' %}
+      ${zona}
+    {% elsif param_destino._parameter_value contains 'expe_poblacion_destino' %}
+      ${expe_poblacion_destino}
+    {% elsif param_destino._parameter_value contains 'fecha_recogida_date' %}
+      ${fecha_recogida_date}
+    {% elsif param_destino._parameter_value contains 'fecha_llegada_date' %}
+      ${fecha_llegada_date}
+    {% elsif param_destino._parameter_value contains 'cr_fecha_ultima_entrega_date' %}
+      ${cr_fecha_ultima_entrega_date}
+    {% elsif param_destino._parameter_value contains 'cr_estado' %}
+      ${cr_estado}
+    {% elsif param_destino._parameter_value contains 'tipa_descripcion' %}
+      ${tipa_descripcion}
+    {% else %}
+      ${dele_nombre_des}
+    {% endif %}
+  ;;
+  }
+
+
   dimension: dinamica_agencia_cliente {
     type: string
-    label: "Agencia/Cliente"
     sql:
           {% if param_agencia_cliente._parameter_value contains 'dele_codigo_pag' %}
             ${dele_codigo_pag}
@@ -359,7 +427,6 @@ view: calidad {
 
   measure: dinamica_t_mas_1 {
     type: number
-    label: "T + 1"
     value_format: "0.00"
     sql:
     CASE
@@ -377,7 +444,6 @@ view: calidad {
 
   measure: dinamica_mayor_t_mas_1 {
     type: number
-    label: "> T + 1"
     value_format: "0.00"
     sql:
     CASE
@@ -395,7 +461,6 @@ view: calidad {
 
   measure: dinamica_pendiente {
     type: number
-    label: "Pendiente"
     value_format: "0.00"
     sql:
     CASE
@@ -413,7 +478,6 @@ view: calidad {
 
   measure: dinamica_otras_pendiente {
     type: number
-    label: "Otras Pdte."
     value_format: "0.00"
     sql:
     CASE
@@ -431,7 +495,6 @@ view: calidad {
 
   measure: dinamica_antes {
     type: number
-    label: "Antes"
     value_format: "0.00"
     sql:
     CASE
@@ -449,7 +512,6 @@ view: calidad {
 
   measure: dinamica_obj {
     type: number
-    label: "Obj"
     value_format: "0.00"
     sql:
     CASE
@@ -467,7 +529,6 @@ view: calidad {
 
   measure: dinamica_acum_obj {
     type: number
-    label: "Acum. Obj"
     value_format: "0.00"
     sql:
     CASE
@@ -485,7 +546,6 @@ view: calidad {
 
   measure: dinamica_delay {
     type: number
-    label: "Delay"
     value_format: "0.00"
     sql:
     CASE
