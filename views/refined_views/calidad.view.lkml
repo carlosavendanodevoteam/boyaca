@@ -338,6 +338,18 @@ view: calidad {
     }
   }
 
+  parameter: param_sum_expe {
+    default_value: "sum_expe_pendiente"
+    allowed_value: { label: "Pendiente" value: "sum_expe_pendiente" }
+    allowed_value: { label: "En Periodo" value: "sum_expe_en_periodo_c" }
+    allowed_value: { label: "Antes de Objetivo" value: "sum_expe_antes_fecha_objetivo_c" }
+    allowed_value: { label: "En Objetivo" value: "sum_expe_en_fecha_objetivo_c" }
+    allowed_value: { label: "Fuera de Hora" value: "sum_expe_fuera_de_hora_c" }
+    allowed_value: { label: "1 Día Retraso" value: "sum_expe_1_dia_retraso_c" }
+    allowed_value: { label: "Más de 1 Día Retraso" value: "sum_expe_mas_1_dia_retraso_c" }
+  }
+
+
   # dimension: dinamica_dimension_principal {
   #   type: string
   #   sql:
@@ -562,7 +574,28 @@ view: calidad {
   }
 
 
-
+  measure: dinamica_sum_expe {
+    type: number
+    sql:
+    {% if param_sum_expe._parameter_value contains 'sum_expe_pendiente' %}
+      ${sum_expe_pendiente}
+    {% elsif param_sum_expe._parameter_value contains 'sum_expe_en_periodo_c' %}
+      ${sum_expe_en_periodo_c}
+    {% elsif param_sum_expe._parameter_value contains 'sum_expe_antes_fecha_objetivo_c' %}
+      ${sum_expe_antes_fecha_objetivo_c}
+    {% elsif param_sum_expe._parameter_value contains 'sum_expe_en_fecha_objetivo_c' %}
+      ${sum_expe_en_fecha_objetivo_c}
+    {% elsif param_sum_expe._parameter_value contains 'sum_expe_fuera_de_hora_c' %}
+      ${sum_expe_fuera_de_hora_c}
+    {% elsif param_sum_expe._parameter_value contains 'sum_expe_1_dia_retraso_c' %}
+      ${sum_expe_1_dia_retraso_c}
+    {% elsif param_sum_expe._parameter_value contains 'sum_expe_mas_1_dia_retraso_c' %}
+      ${sum_expe_mas_1_dia_retraso_c}
+    {% else %}
+      NULL
+    {% endif %}
+  ;;
+  }
 
 
 
