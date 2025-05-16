@@ -177,7 +177,7 @@ view: test_mt_indicadores_medicion {
 
   dimension: valor_ind_3 {
     type: number
-    sql: ${TABLE}.VALOR * 100;;
+    sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
       url: "/dashboards/17?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -187,7 +187,7 @@ view: test_mt_indicadores_medicion {
 
   measure: valor_avg_ind_3 {
     type: average
-    sql: ${TABLE}.VALOR * 100;;
+    sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
       url: "/dashboards/17?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -221,7 +221,7 @@ view: test_mt_indicadores_medicion {
 
   dimension: valor_ind_4 {
     type: number
-    sql: ${TABLE}.VALOR * 100;;
+    sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
       url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -231,7 +231,7 @@ view: test_mt_indicadores_medicion {
 
   measure: valor_avg_ind_4 {
     type: average
-    sql: ${TABLE}.VALOR * 100;;
+    sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
       url: "/dashboards/4?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -310,7 +310,7 @@ view: test_mt_indicadores_medicion {
 
   dimension: valor_ind_6 {
     type: number
-    sql: ${TABLE}.VALOR * 100;;
+    sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
       url: "/dashboards/10?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -320,7 +320,7 @@ view: test_mt_indicadores_medicion {
 
   measure: valor_avg_ind_6 {
     type: average
-    sql: ${TABLE}.VALOR * 100;;
+    sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
       url: "/dashboards/10?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -439,7 +439,7 @@ view: test_mt_indicadores_medicion {
 
   dimension: valor_ind_10 {
     type: number
-    sql: ${TABLE}.VALOR * 100;;
+    sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
       url: "/dashboards/7?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -449,7 +449,7 @@ view: test_mt_indicadores_medicion {
 
   measure: valor_avg_ind_10 {
     type: average
-    sql: ${TABLE}.VALOR * 100 ;;
+    sql: ${TABLE}.VALOR  ;;
     link: {
       label: "Detalle"
       url: "/dashboards/7?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -615,7 +615,7 @@ view: test_mt_indicadores_medicion {
 
   dimension: valor_ind_17 {
     type: number
-    sql: ${TABLE}.VALOR * 100;;
+    sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
       url: "/dashboards/13?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -625,7 +625,7 @@ view: test_mt_indicadores_medicion {
 
   measure: valor_avg_ind_17 {
     type: average
-    sql: ${TABLE}.VALOR * 100;;
+    sql: ${TABLE}.VALOR ;;
     link: {
       label: "Detalle"
       url: "/dashboards/13?Plaza={{ test_mt_indicadores_medicion.plaza | url_encode }}&Region={{test_mt_indicadores_medicion.region| url_encode }}&Fecha+Expediciones={{ _filters['test_mt_indicadores_medicion.fecha_filtro_date'] | url_encode }}&Fecha+Tendencias=7+day"
@@ -717,17 +717,17 @@ view: test_mt_indicadores_medicion {
     CASE
       WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR * 100
-      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '18' AND ${TABLE}.id_indicador = 12 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '19' AND ${TABLE}.id_indicador = 13 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '20' AND ${TABLE}.id_indicador = 15 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR
       ELSE NULL
     END ;;
     link: {
@@ -743,17 +743,17 @@ view: test_mt_indicadores_medicion {
     CASE
       WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR * 100
-      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR
+      WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '18' AND ${TABLE}.id_indicador = 12 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '19' AND ${TABLE}.id_indicador = 13 THEN ${TABLE}.VALOR
       WHEN {% parameter filtro_indicador %} = '20' AND ${TABLE}.id_indicador = 15 THEN ${TABLE}.VALOR
-      WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
+      WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR
       ELSE NULL
     END ;;
     link: {
@@ -823,17 +823,17 @@ view: test_mt_indicadores_medicion {
               CASE
                 WHEN {% parameter filtro_indicador %} = '3' AND ${TABLE}.id_indicador = 1 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '8' AND ${TABLE}.id_indicador = 2 THEN ${TABLE}.VALOR
-                WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR * 100
-                WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR * 100
+                WHEN {% parameter filtro_indicador %} = '17' AND ${TABLE}.id_indicador = 3 THEN ${TABLE}.VALOR
+                WHEN {% parameter filtro_indicador %} = '4' AND ${TABLE}.id_indicador = 4 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '9' AND ${TABLE}.id_indicador = 5 THEN ${TABLE}.VALOR
-                WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR * 100
+                WHEN {% parameter filtro_indicador %} = '10' AND ${TABLE}.id_indicador = 6 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '11' AND ${TABLE}.id_indicador = 7 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '12' AND ${TABLE}.id_indicador = 9 THEN ${TABLE}.VALOR
-                WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR * 100
+                WHEN {% parameter filtro_indicador %} = '7' AND ${TABLE}.id_indicador = 10 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '18' AND ${TABLE}.id_indicador = 12 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '19' AND ${TABLE}.id_indicador = 13 THEN ${TABLE}.VALOR
                 WHEN {% parameter filtro_indicador %} = '20' AND ${TABLE}.id_indicador = 15 THEN ${TABLE}.VALOR
-                WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR * 100
+                WHEN {% parameter filtro_indicador %} = '13' AND ${TABLE}.id_indicador = 17 THEN ${TABLE}.VALOR
                 ELSE NULL
               END
             ) -
