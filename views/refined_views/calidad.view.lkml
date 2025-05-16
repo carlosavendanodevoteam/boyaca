@@ -351,7 +351,7 @@ view: calidad {
 
   parameter: param_orden_medida {
     label: "Ordenar por:"
-    type: unquoted
+    type: string
     allowed_value: { label: "T+1" value: "t_mas_1" }
     allowed_value: { label: "Mayor T+1" value: "mayor_t_mas_1" }
     allowed_value: { label: "Pendiente" value: "pendiente" }
