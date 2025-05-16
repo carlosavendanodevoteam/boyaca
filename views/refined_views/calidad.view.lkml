@@ -349,61 +349,6 @@ view: calidad {
     allowed_value: { label: "Más de 1 Día Retraso" value: "sum_expe_mas_1_dia_retraso_c" }
   }
 
-  parameter: param_orden_medida {
-    label: "Ordenar por:"
-    type: string
-    allowed_value: { label: "PRKgs" value: "PRKgs" }
-    allowed_value: { label: "Pendiente" value: "pendiente" }
-    allowed_value: { label: "Antes" value: "antes" }
-    allowed_value: { label: "Obj" value: "obj" }
-    allowed_value: { label: "Delay" value: "delay" }
-    allowed_value: { label: "Exp Totales" value: "exp_totales" }
-    allowed_value: { label: "Num Bultos" value: "num_bultos" }
-  }
-
-
-
-  # dimension: dinamica_dimension_principal {
-  #   type: string
-  #   sql:
-  #   CASE
-  #     WHEN {% parameter dimension_principal %} = "dele_codigo_pag" THEN ${dele_codigo_pag}
-  #     WHEN {% parameter dimension_principal %} = "dele_codigo_des" THEN ${dele_codigo_des}
-  #     WHEN {% parameter dimension_principal %} = "clie_cent_codigo_nom_ori" THEN ${clie_cent_codigo_nom_ori}
-  #     WHEN {% parameter dimension_principal %} = "tipa_descripcion" THEN ${tipa_descripcion}
-  #     WHEN {% parameter dimension_principal %} = "prse_descripcion" THEN ${prse_descripcion}
-  #     WHEN {% parameter dimension_principal %} = "cr_estado" THEN ${cr_estado}
-  #   END ;;
-  # }
-  # parameter: elegir_agrupacion {
-  #   label: "2. Elegir Agrupación (Filas)"
-  #   view_label: "_PoP"
-  #   type: unquoted
-  #   default_value: "Month"
-  #   allowed_value: {label: "Nombre del Mes" value:"Month"}
-  #   allowed_value: {label: "Día del Año" value: "DOY"}
-  #   allowed_value: {label: "Día del Mes" value: "DOM"}
-  #   allowed_value: {label: "Día de la Semana" value: "DOW"}
-  #   allowed_value: {label: "Semana" value: "Week"}
-  #   allowed_value: {value: "Date"}
-  # }
-
-
-  # dimension: pop_fila  {
-  #   view_label: "_PoP"
-  #   label_from_parameter: elegir_agrupacion
-  #   type: string
-  #   order_by_field: sort_by1
-  #   sql:
-  #     {% if elegir_agrupacion._parameter_value == 'Month' %} ${fecha_filtro_month_name}
-  #     {% elsif elegir_agrupacion._parameter_value == 'DOY' %} ${fecha_filtro_day_of_year}
-  #     {% elsif elegir_agrupacion._parameter_value == 'DOM' %} ${fecha_filtro_day_of_month}
-  #     {% elsif elegir_agrupacion._parameter_value == 'DOW' %} ${fecha_filtro_day_of_week}
-  #     {% elsif elegir_agrupacion._parameter_value == 'Date' %} ${fecha_filtro_date}
-  #     {% elsif elegir_agrupacion._parameter_value == 'Week' %} ${fecha_filtro_week}
-  #     {% else %}NULL{% endif %} ;;
-  # }
-
   dimension: dinamica_destino {
     type: string
     sql:
@@ -609,40 +554,6 @@ view: calidad {
     {% endif %}
   ;;
   }
-
-  measure: ordenador_medida {
-    hidden: yes
-    type: number
-    sql:
-    CASE
-      WHEN {% parameter param_orden_medida %} = 'PRKgs' THEN ${PRKgs}
-      WHEN {% parameter param_orden_medida %} = 'pendiente' THEN ${dinamica_pendiente}
-      WHEN {% parameter param_orden_medida %} = 'antes' THEN ${dinamica_antes}
-      WHEN {% parameter param_orden_medida %} = 'obj' THEN ${dinamica_obj}
-      WHEN {% parameter param_orden_medida %} = 'delay' THEN ${dinamica_delay}
-      WHEN {% parameter param_orden_medida %} = 'exp_totales' THEN ${exp_totales}
-      WHEN {% parameter param_orden_medida %} = 'num_bultos' THEN ${num_bultos}
-      ELSE NULL
-    END ;;
-  }
-
-  measure: medida_dinamica_ordenada {
-    label_from_parameter: param_orden_medida
-    type: number
-    order_by_field: ordenador_medida
-    sql:
-    CASE
-      WHEN {% parameter param_orden_medida %} = 'PRKgs' THEN ${PRKgs}
-      WHEN {% parameter param_orden_medida %} = 'pendiente' THEN ${dinamica_pendiente}
-      WHEN {% parameter param_orden_medida %} = 'antes' THEN ${dinamica_antes}
-      WHEN {% parameter param_orden_medida %} = 'obj' THEN ${dinamica_obj}
-      WHEN {% parameter param_orden_medida %} = 'delay' THEN ${dinamica_delay}
-      WHEN {% parameter param_orden_medida %} = 'exp_totales' THEN ${exp_totales}
-      WHEN {% parameter param_orden_medida %} = 'num_bultos' THEN ${num_bultos}
-      ELSE NULL
-    END ;;
-  }
-
 
 
 

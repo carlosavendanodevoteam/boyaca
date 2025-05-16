@@ -45,26 +45,6 @@ explore: derived_ind_13 {}
 explore: derived_ind_15 {}
 explore: derived_ind_17 {}
 
-explore: pop2 {
-  label: "POP 2"
-  sql_always_where:
-  {% if pop2.current_date_range._is_filtered %} {% condition pop2.current_date_range %} ${fecha_filtro_raw} {% endcondition %}
-  {% if pop2.previous_date_range._is_filtered or pop2.compare_to._in_query %}
-  {% if pop2.comparison_periods._parameter_value == "2" %}
-  or DATE(${fecha_filtro_raw}) between  DATE(${period_2_start}) and  DATE(${period_2_end})
-  {% elsif pop2.comparison_periods._parameter_value == "3" %}
-  or DATE(${fecha_filtro_raw}) BETWEEN DATE(${period_2_start}) AND DATE(${period_2_end})
-  or DATE(${fecha_filtro_raw}) BETWEEN DATE(${period_3_start}) AND DATE(${period_3_end})
-  {% elsif pop2.comparison_periods._parameter_value == "4" %}
-  or  DATE(${fecha_filtro_raw}) between  DATE(${period_2_start}) and  DATE(${period_2_end})
-  or  DATE(${fecha_filtro_raw}) between  DATE(${period_3_start})and  DATE(${period_3_end}) or  DATE(${fecha_filtro_raw}) between  DATE(${period_4_start}) and  DATE(${period_4_end})
-  {% else %} 1 = 1
-  {% endif %}
-  {% endif %}
-  {% else %} 1 = 1
-  {% endif %};;
-}
-
 map_layer: provincias {
   file: "/maps/spain-provinces-geo_.geojson"
 }
