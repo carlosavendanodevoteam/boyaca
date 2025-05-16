@@ -352,13 +352,10 @@ view: calidad {
   parameter: param_orden_medida {
     label: "Ordenar por:"
     type: string
-    allowed_value: { label: "T+1" value: "t_mas_1" }
-    allowed_value: { label: "Mayor T+1" value: "mayor_t_mas_1" }
+    allowed_value: { label: "PRKgs" value: "PRKgs" }
     allowed_value: { label: "Pendiente" value: "pendiente" }
-    allowed_value: { label: "Otras Pendiente" value: "otras_pendiente" }
     allowed_value: { label: "Antes" value: "antes" }
     allowed_value: { label: "Obj" value: "obj" }
-    allowed_value: { label: "Acum Obj" value: "acum_obj" }
     allowed_value: { label: "Delay" value: "delay" }
     allowed_value: { label: "Exp Totales" value: "exp_totales" }
     allowed_value: { label: "Num Bultos" value: "num_bultos" }
@@ -618,13 +615,10 @@ view: calidad {
     type: number
     sql:
     CASE
-      WHEN {% parameter param_orden_medida %} = 't_mas_1' THEN ${dinamica_t_mas_1}
-      WHEN {% parameter param_orden_medida %} = 'mayor_t_mas_1' THEN ${dinamica_mayor_t_mas_1}
+      WHEN {% parameter param_orden_medida %} = 'PRKgs' THEN ${PRKgs}
       WHEN {% parameter param_orden_medida %} = 'pendiente' THEN ${dinamica_pendiente}
-      WHEN {% parameter param_orden_medida %} = 'otras_pendiente' THEN ${dinamica_otras_pendiente}
       WHEN {% parameter param_orden_medida %} = 'antes' THEN ${dinamica_antes}
       WHEN {% parameter param_orden_medida %} = 'obj' THEN ${dinamica_obj}
-      WHEN {% parameter param_orden_medida %} = 'acum_obj' THEN ${dinamica_acum_obj}
       WHEN {% parameter param_orden_medida %} = 'delay' THEN ${dinamica_delay}
       WHEN {% parameter param_orden_medida %} = 'exp_totales' THEN ${exp_totales}
       WHEN {% parameter param_orden_medida %} = 'num_bultos' THEN ${num_bultos}
@@ -638,13 +632,10 @@ view: calidad {
     order_by_field: ordenador_medida
     sql:
     CASE
-      WHEN {% parameter param_orden_medida %} = 't_mas_1' THEN ${dinamica_t_mas_1}
-      WHEN {% parameter param_orden_medida %} = 'mayor_t_mas_1' THEN ${dinamica_mayor_t_mas_1}
+      WHEN {% parameter param_orden_medida %} = 'PRKgs' THEN ${PRKgs}
       WHEN {% parameter param_orden_medida %} = 'pendiente' THEN ${dinamica_pendiente}
-      WHEN {% parameter param_orden_medida %} = 'otras_pendiente' THEN ${dinamica_otras_pendiente}
       WHEN {% parameter param_orden_medida %} = 'antes' THEN ${dinamica_antes}
       WHEN {% parameter param_orden_medida %} = 'obj' THEN ${dinamica_obj}
-      WHEN {% parameter param_orden_medida %} = 'acum_obj' THEN ${dinamica_acum_obj}
       WHEN {% parameter param_orden_medida %} = 'delay' THEN ${dinamica_delay}
       WHEN {% parameter param_orden_medida %} = 'exp_totales' THEN ${exp_totales}
       WHEN {% parameter param_orden_medida %} = 'num_bultos' THEN ${num_bultos}
